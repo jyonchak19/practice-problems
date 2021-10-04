@@ -1,0 +1,19 @@
+package BinaryTreeExamples;
+
+public class TreeNode {
+    int value;
+    TreeNode right;
+    TreeNode left;
+
+    public TreeNode(int value) {
+        this.value = value;
+    }
+
+    public TreeNode(int value, TreeNode left, TreeNode right) {
+        this.value = value;
+        this.left = left;
+        this.right = right;
+    }
+
+    public TreeNode() {}
+}
