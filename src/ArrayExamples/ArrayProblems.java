@@ -197,9 +197,11 @@ public class ArrayProblems {
             return true;
         if(matrixOne == null ^ matrixTwo == null)
             return false;
-        if(matrixOne.length != matrixTwo.length)
+        if(matrixOne.length != matrixTwo.length) // {}.length -> 0 {}
             return false;
-        if(matrixOne[0].length != matrixTwo[0].length)
+        if(matrixOne.length == 0 && matrixTwo.length == 0)
+            return true;
+        if(matrixOne[0].length != matrixTwo[0].length) // {}
             return false;
         for(int i = 0; i < matrixOne.length; i++){
             for(int j = 0; j < matrixTwo.length; j++){
@@ -208,6 +210,31 @@ public class ArrayProblems {
             }
         }
         return true;
+    }
+
+    // as input we have an N x N matrix where some of the items are 0
+    // if any of the items are 0, set the entire row and column to 0.
+    // items that aren't 0 will be represented by integers bw 1-9
+    // input = [[1,2,3,4],
+    //          [5,0,7,8],
+    //          [6,1,1,2],
+    //          [2,3,4,0]]
+
+    // output [ [1,0,3,0],
+    //          [0,0,0,0],
+    //          [6,0,1,0],
+    //          [0,0,0,0]]
+    public static int[][] zeroMatrix(int[][] input) {
+        final int M = input.length; // row length
+        final int N = input[0].length; // column length
+        boolean[][] valuesToNullify = new boolean[M][N];
+
+        for(int i = 0; i < M; i++) {
+            for(int j = 0; j < N; j++) {
+                if(input[i][j] == 0)
+                    valuesToNullify[i][j] = true;
+            }
+        }
     }
 
 }

@@ -3,7 +3,12 @@ package ArrayExamples;
 public class ArrayDriver {
 
     public static void main(String[] args) {
-       
+       int[][] inputOne = {};
+       int[][] inputTwo = {};
+       if(ArrayProblems.checkMatrixEquality(inputOne, inputTwo))
+           System.out.println("checkMatirxEquality: Success");
+       else
+           System.out.println("checkMatirxEquality: Failure");
     }
     public static void testRepeatSB() {
         StringBuilder test = new StringBuilder("abc");
