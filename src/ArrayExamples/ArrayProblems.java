@@ -225,17 +225,48 @@ public class ArrayProblems {
     //          [6,0,1,0],
     //          [0,0,0,0]]
     public static int[][] zeroMatrix(int[][] input) {
-        final int M = input.length; // row length
-        final int N = input[0].length; // column length
+        final int M = input.length; // column length
+        final int N = input[0].length; // row length
         boolean[][] valuesToNullify = new boolean[M][N];
 
-        for(int i = 0; i < M; i++) {
-            for(int j = 0; j < N; j++) {
+        for(int i = 0; i < N; i++) {
+            for(int j = 0; j < M; j++) {
                 if(input[i][j] == 0)
                     valuesToNullify[i][j] = true;
             }
         }
+
+        for(int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                if(valuesToNullify[i][j]){
+                    nullifyRow(input, i);
+                    nullifyColumn(input, j);
+                }
+            }
+        }
+
+        return input;
     }
 
+    private static void nullifyRow(int[][] matrix, int row) {
+        for(int i = 0; i < matrix[0].length; i++) {
+            matrix[row][i] = 0;
+        }
+    }
+
+    private static void nullifyColumn(int[][] matrix, int column) {
+        for(int i = 0; i < matrix.length; i++) {
+            matrix[i][column] = 0;
+        }
+    }
+
+    public static void printMatrix(int[][] matrix) {
+        for(int i = 0; i < matrix[0].length; i++) {
+            for(int j = 0; j < matrix.length; j++) {
+                System.out.print(matrix[i][j] + "   ");
+            }
+            System.out.println();
+        }
+    }
 }
 

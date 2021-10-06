@@ -3,12 +3,28 @@ package ArrayExamples;
 public class ArrayDriver {
 
     public static void main(String[] args) {
-       int[][] inputOne = {};
-       int[][] inputTwo = {};
-       if(ArrayProblems.checkMatrixEquality(inputOne, inputTwo))
-           System.out.println("checkMatirxEquality: Success");
-       else
-           System.out.println("checkMatirxEquality: Failure");
+        int N = 5;
+        int[][] randomMatrix = randomMatrix(N, N, -5, 5);
+        ArrayProblems.printMatrix(randomMatrix);
+        System.out.println();
+        ArrayProblems.printMatrix(ArrayProblems.zeroMatrix(randomMatrix));
+    }
+
+    public static void testZeroMatrixOne() {
+        int[][] inputMatrix = {{1,2,3,4},{5,0,7,8},{6,1,1,2},{2,3,4,0}};
+        int[][] outputMatrix = {{1,0,3,0}, {0,0,0,0}, {6,0,1,0}, {0,0,0,0}};
+
+        System.out.println("Input Matrix");
+        ArrayProblems.printMatrix(inputMatrix);
+        System.out.println("Output Matrix");
+        ArrayProblems.printMatrix(outputMatrix);
+
+        if(ArrayProblems.checkMatrixEquality(ArrayProblems.zeroMatrix(inputMatrix), outputMatrix))
+            System.out.println("zeroMatrix: Success");
+        else
+            System.out.println("zeroMatrix: Failure");
+        System.out.println("Zero Matrix");
+        ArrayProblems.printMatrix(inputMatrix);
     }
     public static void testRepeatSB() {
         StringBuilder test = new StringBuilder("abc");
@@ -92,4 +108,33 @@ public class ArrayDriver {
         else
             System.out.println("rotateMatrix: Failure");
     }
+
+    public static void testCheckMatrixEquality(){
+        int[][] inputOne = {};
+        int[][] inputTwo = {};
+        if(ArrayProblems.checkMatrixEquality(inputOne, inputTwo))
+            System.out.println("checkMatrixEquality: Success");
+        else
+            System.out.println("checkMatrixEquality: Failure");
+    }
+
+    public static int[][] randomMatrix(int M, int N, int min, int max) {
+        int[][] matrix = new int[M][N];
+        for(int i = 0; i < M; i++) {
+            for(int j = 0; j < N; j++) {
+                matrix[i][j] = RandomIntInRange(min, max);
+            }
+        }
+        return matrix;
+    }
+
+    public static int RandomIntInRange(int min, int max) {
+        return randomInt(max + 1 - min) + min;
+    }
+
+    public static int randomInt(int n) {
+        return (int) (Math.random() * n);
+    }
+
+
 }
