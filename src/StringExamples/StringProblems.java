@@ -143,4 +143,112 @@ public class StringProblems {
         }
         return result.toString();
     }
+
+
+    // 3 types of edits to a string: inserting, removing, or replacing.
+    // given two strings, this function should check if they are between 0 and 1
+    // edits away from each other.
+    // pale -> paley -> true difference in the lengths is <= 1
+    // pale -> paleye -> true difference in the lengths is > 1
+    // ex: pale, ple -> true
+    // ex: pale, bale -> true
+    // ex pale, bake -> false
+    // s1 N long, s2 M long
+    public static boolean oneEditReplace(String s1, String s2) {
+// TODO handle null edge case
+//        if(s1 == null && s2.length() == 1)
+//            return true;
+//        if(s1.length() == 1 && s2 == null)
+//            return true;
+
+        int numEdits = 0;
+        HashMap<Character, Integer> map1 = new HashMap<>();
+        HashMap<Character, Integer> map2 = new HashMap<>();
+        for(char c: s1.toCharArray()) {
+            if (map1.containsKey(c))
+                map1.put(c, map1.get(c) + 1);
+            else
+                map1.put(c, 1);
+        }
+
+        for(char c: s2.toCharArray()) {
+            if(map2.containsKey(c))
+                map2.put(c, map2.get(c) + 1);
+            else
+                map2.put(c, 1);
+        }
+
+        char[] charArray;
+        if(s1.length() > s2.length()) {
+            charArray = s1.toCharArray();
+
+        }
+        else {
+            charArray = s2.toCharArray();
+        }
+        for (char c : charArray) {
+            if(!map1.containsKey(c) || !map2.containsKey(c))
+                numEdits++;
+            else if (!map1.get(c).equals(map2.get(c)))
+                numEdits++;
+        }
+        return numEdits == 0 || numEdits == 1;
+    }
+
+    // two types of edits: insert/remove, replace
+    // ~~~~ insert/remove case ~~~~
+    // 1. one string is longer than the other
+    //
+    // s1 pale, s2 ple
+    // bale, ple
+    public static boolean oneEditReplaceConstantSpace(String s1, String s2) {
+        int N = s1.length(), M = s2.length(), i = 0, j = 0, count = 0;
+        if(Math.abs(N - M) > 1)
+            return false;
+        while(i < N && j < M) {
+            if(s1.charAt(i) != s2.charAt(j)) { // if character mismatch found
+                if (count == 1)
+                    return false;
+                if (N > M) {
+                    i++;
+                } else if (M > N) {
+                    j++;
+                } else {
+                    i++;
+                    j++;
+                }
+                count++;
+            }
+            else {
+                i++;
+                j++;
+            }
+        }
+        return count == 0 || count == 1;
+    }
+
+    // palindrome: "racecar", "abba", "aba" "bab"
+    // input: "babad" -> "bab" (or "aba" is also valid)
+    // input: "cbbd" -> "bb"
+    // input: "a" -> "a"
+    // input: "ac" -> "a" (or "c")
+    public static String longestPalindrome(String s) {
+        for(int i = 0; i < s.length(); i++){
+            for(int j = s.length() - 1; j > i; j--){
+                if(s.charAt(i) == s.charAt(j))
+                    isPalindrome(s.substring(i, j));
+            }
+        }
+    }
+
+    public static boolean isPalindrome(String s) {
+        int i = 0, j = s.length() - 1;
+        while(i < j) {
+            if(s.charAt(i) != s.charAt(j))
+                return false;
+            i++;
+            j--;
+        }
+        return true;
+    }
 }
