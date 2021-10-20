@@ -233,11 +233,46 @@ public class StringProblems {
     // input: "a" -> "a"
     // input: "ac" -> "a" (or "c")
     public static String longestPalindrome(String s) {
+        int len = s.length();
+        if (len < 2)
+            return s;
+
+        String currentLongest = "";
+        String substring;
         for(int i = 0; i < s.length(); i++){
-            for(int j = s.length() - 1; j > i; j--){
-                if(s.charAt(i) == s.charAt(j))
-                    isPalindrome(s.substring(i, j));
+            for(int j = s.length() - 1; j >= i; j--) {
+                if(s.charAt(i) == s.charAt(j)) {
+                    substring = s.substring(i, j + 1);
+                    if(isPalindrome(substring)) {
+                        if (substring.length() > currentLongest.length()) {
+                            currentLongest = substring;
+                        }
+                    }
+                }
             }
+        }
+        return currentLongest;
+    }
+    private static int lo, high;
+    public static String longestPalindromeAlt(String s) {
+        int len = s.length();
+        if (len < 2)
+            return s;
+
+        for (int i = 0; i < len -1; i ++) {
+            extendPalindrome(s, i, i); // assuming an odd length
+            extendPalindrome(s, i, i+1); // assume even
+        }
+        return s.substring(lo, high);
+    }
+    private static void extendPalindrome(String s, int j, int k) {
+        while(j >= 0 && k < s.length() && s.charAt(j) == s.charAt(k)) {
+            j--;
+            k++;
+        }
+        if (high < k - j -1) {
+            lo = j + 1;
+            high =  k - j -1;
         }
     }
 

@@ -3,14 +3,17 @@ package StringExamples;
 // TODO "TDD": test driven development
 public class StringDriver {
     public static void main(String[] args) {
-        String[] stringList = {"racecar", "bob", ""};
-        boolean[] outputList = {true, };
+        String[] stringList = {"racecar", "babad", "cbbd", "", "a", "ac"};
+        String[] outputList = {"racecar", "bab", "bb", "", "a", "a"};
+        String output;
         for(int i = 0; i < stringList.length; i++) {
             System.out.println("test for string " + stringList[i]);
-            if(outputList[i] == StringProblems.isPalindrome(stringList[i]))
-                System.out.println("isPalindrome: success");
+            output = StringProblems.longestPalindrome(stringList[i]);
+            System.out.println("output: " + output);
+            if(outputList[i].equals(output))
+                System.out.println("longestPalindrome: success");
             else
-                System.out.println("isPalindrome: failure");
+                System.out.println("longestPalindrome: failure");
         }
     }
 
@@ -99,6 +102,18 @@ public class StringDriver {
                 System.out.println("Success");
             else
                 System.out.println("Failure");
+        }
+    }
+
+    public void testIsPalindrome() {
+        String[] stringList = {"racecar", "bob", "car", "", "a", "121"};
+        boolean[] outputList = {true, true, false, true, true, true};
+        for (int i = 0; i < stringList.length; i++) {
+            System.out.println("test for string " + stringList[i]);
+            if (outputList[i] == StringProblems.isPalindrome(stringList[i]))
+                System.out.println("isPalindrome: success");
+            else
+                System.out.println("isPalindrome: failure");
         }
     }
 }
