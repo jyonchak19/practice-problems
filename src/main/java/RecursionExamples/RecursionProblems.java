@@ -198,4 +198,33 @@ public class RecursionProblems {
         if (start == 0) return true;
         return !(start > 0 && nums[start] == 1 && nums[start - 1] % 5 == 0);
     }
+
+    // check to see if it's possible to divide nums into 2 groups
+    // one group's sum is a multiple of 10, sum of the other group is odd
+    // splitodd10(5,5,6, 1) -> true
+    public static boolean splitOdd10(int[] nums) {
+        if(nums.length == 1 || nums.length == 0)
+            return false;
+        return splitOdd10Helper(0, nums, 0, 0);
+    }
+
+    private static boolean splitOdd10Helper(int start, int[] nums, int sum1, int sum2) {
+        if(start >= nums.length) {
+            return (divisibleBy10(sum1) && isOdd(sum2)) || (isOdd(sum1) && divisibleBy10(sum2));
+        }
+        return splitOdd10Helper(start + 1, nums, sum1 + nums[start], sum2) ||
+                splitOdd10Helper(start + 1, nums, sum1, sum2 + nums[start]);
+    }
+
+    private static boolean divisibleBy10(int num) {
+        if(num == 0)
+            return false;
+        return num % 10 == 0;
+    }
+
+    private static boolean isOdd(int num) {
+        if(num == 0)
+            return false;
+        return num % 2 != 0;
+    }
 }

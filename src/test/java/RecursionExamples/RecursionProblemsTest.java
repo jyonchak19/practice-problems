@@ -32,4 +32,14 @@ public class RecursionProblemsTest {
             Assert.assertEquals(RecursionProblems.stringCleaner(input[i]), output[i]);
         }
     }
+
+    @Test
+    public void splitOdd10Test() {
+        int[][] numsInputs = {{5,5,6, 1}, {3,6,8}, {2}, {1}, {5,1,6,5}, {-5,1,6,5}, {5,5,6}};
+        boolean[] expectedResult = {true, false, false, false, true, false, false};
+        for(int i = 0; i < numsInputs.length; i++) {
+            System.out.println("numsInput: " + Arrays.toString(numsInputs[i]));
+            Assert.assertEquals(RecursionProblems.splitOdd10(numsInputs[i]), expectedResult[i]);
+        }
+    }
 }
