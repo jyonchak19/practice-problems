@@ -268,5 +268,24 @@ public class ArrayProblems {
             System.out.println();
         }
     }
+
+    public static ArrayList<String> lessSimpleFizzBuzz(int start, int end) {
+        ArrayList<String> result = new ArrayList<>();
+        for(int i = start; i <= end; i++) {
+            if(i % 3 == 0 && i % 5 == 0)
+                result.add( "FizzBuzz");
+            else if(i % 3 == 0)
+                result.add( "Fizz");
+            else if(i % 5 == 0)
+                result.add( "Buzz");
+            else
+                result.add(String.valueOf(i));
+        }
+        return result;
+    }
+
+    public static ArrayList<String> simpleFizzBuzz(int n) {
+        return lessSimpleFizzBuzz(1, n);
+    }
 }
 

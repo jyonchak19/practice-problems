@@ -286,4 +286,46 @@ public class StringProblems {
         }
         return true;
     }
+
+    // hello, hi -> lohi
+    // hello, java -> ellojava
+    // java, hello -> javaello
+    public static String minCat(String a, String b) {
+        String subStr;
+        if(a.length() < b.length()) {
+            int dif = b.length() - a.length();
+            subStr = b.substring(dif);
+            return a + subStr;
+        }
+        else if(a.length() > b.length()){
+            int dif = a.length() - b.length();
+            subStr = a.substring(dif);
+            return subStr + b;
+        }
+        else {
+            return a + b;
+        }
+    }
+
+    // repeatN("hello", 3) -> "llollollo"
+    // repeatN("hello", 2) -> "lolo"
+    public static String repeatN(String str, int n) {
+        String subStr;
+        if(n >= str.length())
+            subStr = str;
+        else
+            subStr = str.substring(str.length() - n);
+        return subStr.repeat(n);
+    }
+    // sumDigits("aa1bc2bd3") -> 6
+    // sumDigits("milk") -> 0
+    // hint: str.charAt, Character.isDigit(someChar), Integer.parseInt(someChar)
+    public static int sumDigits(String str) {
+        int sum = 0;
+        for(int i = 0; i < str.length(); i++) {
+            if(Character.isDigit(str.charAt(i)))
+                sum += Integer.parseInt(str.substring(i, i + 1));
+        }
+        return sum;
+    }
 }
