@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Arrays;
 import java.util.*;
+
 public class HashTableExamples {
     public static void main(String[] args) {
         HashSet<String> rafisCustomIngredientSet = new HashSet<>();
@@ -15,7 +16,6 @@ public class HashTableExamples {
         rafisCustomIngredientSet.add("grapes");
         System.out.print(rafisCustomIngredientSet);
     }
-
 
      public static int numIdenticalPairs(int[] nums) {
         // TIP: .size() for Java Classes, .length for primitives (arrays)
@@ -81,8 +81,6 @@ public class HashTableExamples {
         return numSmaller;
     }
 
-
-
     public int[] smallerThanCurrOptimized(int[] nums) {
         int[] numSmaller = nums.clone();
         Arrays.sort(numSmaller); // O(NLogN)
@@ -115,18 +113,12 @@ public class HashTableExamples {
         return sum;
     }
 
+    // returns true if all integers in nums are unique
     public boolean uniqueOccurrences(int[] nums) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        int count;
-        for (int i = 0; i < nums.length; i++) {
-            if (map.containsKey(nums[i])) {
-                count = map.get(nums[i]) + 1;
-                map.put(nums[i], count);
-            } else
-                map.put(nums[i], 1);
-        }
-        HashSet<Integer> set = new HashSet<>(map.values());
-        return (map.size() == set.size());
+        Set <Integer> set = new HashSet <>();
+        for (Integer i: nums)
+            set.add(i);
+        return set.size() == nums.length;
     }
 
  }

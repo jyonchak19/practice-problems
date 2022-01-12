@@ -287,5 +287,70 @@ public class ArrayProblems {
     public static ArrayList<String> simpleFizzBuzz(int n) {
         return lessSimpleFizzBuzz(1, n);
     }
+
+    // [1, 2, 1, 1, 3] -> 4
+    // [1, 4, 2, 1, 4, 1, 4] -> 6
+    // [1,4, 2, 1, 4, 4, 4] -> 6
+    // [1, 4, 2, 3, 4] -> 4
+    public static int maxSpan(int[] nums) {
+        int currentMax = 0;
+        for(int i = 0; i < nums.length - 1; i++){
+            for(int j = 0; j < nums.length; j++){
+                if(nums[i] == nums[j] && j - i + 1 > currentMax)
+                    currentMax = j - i + 1;
+            }
+        }
+        return currentMax;
+    }
+
+    public static int maxSpanEfficient(int[] nums) {
+        int maxSpan = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i = 0; i < nums.length; i++) {
+            if (!map.containsKey(nums[i])) { // add it to the map
+                map.put(nums[i], i);
+            }
+            else { // handle span
+                if(i - map.get(nums[i]) + 1 > maxSpan)
+                    maxSpan = i - map.get(nums[i]) + 1;
+            }
+        }
+        return maxSpan;
+    }
+
+    //    2, 3, 200, 3, 4, 200
+    // -> [1, 1, 1, 2, 1, 2]..
+    public static int[] countOccurrences(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        if(nums.length == 0)
+            return new int[]{0};
+        int[] occurrences = new int[nums.length];
+        int count;
+        for(int i = 0; i < nums.length; i++) {
+            if(!map.containsKey(nums[i])) {
+                map.put(nums[i], 1);
+                occurrences[i] = 1;
+            }
+            else {
+                count = map.get(nums[i]) + 1;
+                map.put(nums[i], count);
+                occurrences[i] = map.get(nums[i]);
+            }
+        }
+        return occurrences;
+    }
+
+    public static int[] countOccurrencesOptimized(int[] nums) {
+        if(nums.length == 0)
+            return new int[]{0};
+        int[] map = new int[201];
+        for(int i = 0; i < nums.length; i++) {
+            map[nums[i]]++;
+            nums[i] = map[nums[i]];
+        }
+        return nums;
+    }
+
+    //Trying to make unoptimized version of above
 }
 
