@@ -67,4 +67,50 @@ public class ArrayProblemsTest {
             Assert.assertArrayEquals(expectedResults[i], ArrayProblems.countOccurrencesOptimized(inputs[i]));
         }
     }
+
+    @Test
+    public void countOccurrencesUnoptimizedTest() {
+        int[][] expectedResults = {{1, 1, 1, 2, 1, 2}, {0}};
+        int[][] inputs = {{2, 3, 200, 3, 4, 200}, {}};
+        for(int i = 0; i < expectedResults.length; i++) {
+            Assert.assertArrayEquals(expectedResults[i], ArrayProblems.countOccurrencesUnoptimized(inputs[i]));
+        }
+    }
+
+    @Test
+    public void countOccurrencesUnoptimized2Test() {
+        int[][] expectedResults = {{1, 1, 1, 2, 1, 2}, {0}};
+        int[][] inputs = {{2, 3, 200, 3, 4, 200}, {}};
+        for(int i = 0; i < expectedResults.length; i++) {
+            Assert.assertArrayEquals(expectedResults[i], ArrayProblems.countOccurrencesUnoptimized2(inputs[i]));
+        }
+    }
+
+    @Test
+    public void fix34Test() {
+        ArrayList<Integer> expectedResult1 = new ArrayList<>(List.of(1,3,4,1));
+        ArrayList<Integer> expectedResult2 = new ArrayList<>(List.of(1,3,4,1,1,3,4));
+        ArrayList<Integer> expectedResult3 = new ArrayList<>(List.of(3,4,2,2));
+        Assert.assertEquals(expectedResult1, ArrayProblems.fix34(new int[] {1,3,1,4}));
+        Assert.assertEquals(expectedResult2, ArrayProblems.fix34(new int[] {1,3,1,4,4,3,1}));
+        Assert.assertEquals(expectedResult3, ArrayProblems.fix34(new int[] {3,2,2,4}));
+    }
+
+    @Test
+    public void fix34OptimizedTest() {
+        int[][] expectedResults = {{1,3,4,1}, {1,3,4,1,1,3,4}, {3,4,2,2}};
+        int[][] inputs = {{1,3,1,4}, {1,3,1,4,4,3,1}, {3,2,2,4}};
+        for(int i = 0; i < expectedResults.length; i++) {
+            Assert.assertArrayEquals(expectedResults[i], ArrayProblems.fix34Optimized(inputs[i]));
+        }
+    }
+
+    @Test
+    public void fix34AltTest() {
+        int[][] expectedResults = {{1,3,4,1}, {1,3,4,1,1,3,4}, {3,4,2,2}};
+        int[][] inputs = {{1,3,1,4}, {1,3,1,4,4,3,1}, {3,2,2,4}};
+        for(int i = 0; i < expectedResults.length; i++) {
+            Assert.assertArrayEquals(expectedResults[i], ArrayProblems.fix34Alt(inputs[i]));
+        }
+    }
 }

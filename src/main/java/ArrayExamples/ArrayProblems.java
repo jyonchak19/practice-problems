@@ -352,5 +352,110 @@ public class ArrayProblems {
     }
 
     //Trying to make unoptimized version of above
+    public static int[] countOccurrencesUnoptimized(int[] nums) {
+        if(nums.length == 0)
+            return new int[]{0};
+        int count;
+        int[] result = new int[nums.length];
+        for(int i = 0; i < nums.length; i++) {
+            count = 0;
+            for(int j = 0; j <= i; j++) {
+                if (nums[j] == nums[i])
+                    count++;
+            }
+            result[i] = count;
+        }
+        return result;
+    }
+
+    public static int[] countOccurrencesUnoptimized2(int[] nums) {
+        if(nums.length == 0)
+            return new int[]{0};
+        int count;
+        for(int i = nums.length - 1; i >= 0; i--) {
+            count = 0;
+            for(int j = 0; j <=i; j++) {
+                if (nums[j] == nums[i])
+                    count++;
+            }
+            nums[i] = count;
+        }
+        return nums;
+    }
+
+    // return the array that was inputted but rearranged
+    // so that every 3 is followed by a 4.
+    // 3s cannot move, but every other number can.
+    // The array will always contain the same number of 3s/4s
+    // 1,3,1,4 -> 1,3,4,1
+    // 1,3,1,4,4,3,1 -> 1,3,4,1,1,3,4
+    // 3,2,2,4 -> 3,4,2,2
+    public static ArrayList<Integer> fix34(int[] nums) {
+        ArrayList<Integer> result = new ArrayList<>();
+        boolean moved4 = false;
+        boolean movedNum = false;
+        for(int i = 0; i < nums.length; i++) {
+            result.add(i, nums[i]);
+            }
+        for(int i = 0; i < result.size(); i++) {
+            if(result.get(i) == 3 && result.get(i+1) != 4) {
+                for(int j = 0; !moved4; j++) {
+                    if(result.get(j) == 4 && result.get(j-1) != 3) {
+                        result.add(i+1, 4);
+                        if(j > i){
+                            result.remove(j+1);
+                        }
+                        else {
+                            result.remove(j);
+                            for(int k = j + 2; !movedNum; k++) {
+                                if(result.get(k) != 3 && result.get(k) != 4){
+                                    result.add(i-1, result.get(k));
+                                    result.remove(k+1);
+                                    movedNum = true;
+                                }
+                            }
+                            movedNum = false;
+                        }
+                        moved4 = true;
+                    }
+                }
+                moved4 = false;
+            }
+        }
+        return result;
+    }
+
+    public static int[] fix34Optimized(int[] nums) {
+        boolean moved4 = false;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 3 && nums[i + 1] != 4) {
+                for (int j = 0; !moved4; j++) {
+                    if (nums[j] == 4 && nums[j - 1] != 3) {
+                        int temp = nums[i + 1];
+                        nums[i + 1] = 4;
+                        nums[j] = temp;
+                        moved4 = true;
+                    }
+                }
+                moved4 = false;
+            }
+        }
+        return nums;
+    }
+
+    public static int[] fix34Alt(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 3) {
+                for (int j = 0; j < nums.length; j++) {
+                    if (nums[j] == 4 && nums[j-1] != 3) {
+                        int temp = nums[i + 1];
+                        nums[i + 1] = 4;
+                        nums[j] = temp;
+                    }
+                }
+            }
+        }
+        return nums;
+    }
 }
 
