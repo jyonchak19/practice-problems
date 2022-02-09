@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ArrayProblemsTest {
     @Test
-    public void simpleFizzBuzzTest(){
+    public void simpleFizzBuzzTest() {
         ArrayList<String> expectedResult1 = new ArrayList<>(List.of("1","2","Fizz"));
         ArrayList<String> expectedResult2 = new ArrayList<>(List.of("1","2","Fizz","4","Buzz"));
         ArrayList<String> expectedResult3 = new ArrayList<>(List.of(

@@ -457,5 +457,37 @@ public class ArrayProblems {
         }
         return nums;
     }
-}
 
+// height = [1,8,6,2,5,4,8,3,7]
+
+    public static int maxArea(int[] heights) {
+        int currentMax = 0;
+        for(int i = 0; i < heights.length; i++) {
+            for(int j = i; j < heights.length; j++) {
+                int height = Math.min(heights[i], heights[j]);
+                if(height * (j-i) > currentMax)
+                    currentMax = height * (j-i);
+            }
+        }
+        return currentMax;
+    }
+
+    public static int maxAreaOptimized(int[] heights) {
+        int l = 0;
+        int r = heights.length - 1;
+        int maxArea = 0;
+        int height = 0;
+
+        while (l < r) {
+            // calculate the maximum area
+            height = Math.min(heights[l], heights[r]);
+            maxArea = Math.max(maxArea, height * (r-l));
+            // shift one of the pointers
+            if(heights[r] > heights[l])
+                l++;
+            else
+                r--;
+        }
+        return maxArea;
+    }
+}

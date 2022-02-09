@@ -328,4 +328,77 @@ public class StringProblems {
         }
         return sum;
     }
+
+
+    // abcxxxabc -> 1
+    // xxxabyyyycd -> 3
+    // ab -> 0
+    // aaabbb
+    // what if there are no overlaps allowed?
+    public static int countTriple(String str) {
+        int count = 0;
+        for(int i = 0; i < str.length() - 2; i++) {
+            if(str.charAt(i) == str.charAt(i+1) && str.charAt(i+1) == str.charAt(i+2)) {
+                count++;
+                i = i + 2;
+            }
+        }
+        return count;
+    }
+
+    // hoopla -> 2
+    // abbCCCddBBBxx -> 3
+    public static int maxRepeat(String str) {
+        int max = 0;
+        int currentCount = 1;
+        for(int i = 1; i < str.length(); i++) {
+            if(str.charAt(i) == str.charAt(i-1))
+                currentCount++;
+            else
+                currentCount = 1;
+            if(currentCount > max)
+                max = currentCount;
+        }
+        return max;
+    }
+
+    // TODO, harder problem - Dynamic Programming
+    // helloandhelloaardvark -> hello
+    public static String longestRepeatingSubstring(String str) {
+        return "";
+    }
+
+    // apple, pleap -> true
+    // waterbottle, erbottlewat -> true
+    public static boolean isRotation(String s1, String s2) {
+        if((s1.length() == 0 && s2.length() != 0) || (s1.length() != 0 && s2.length() == 0))
+            return false;
+        else if(s1.length() == 0 && s2.length() == 0)
+            return true;
+        int count;
+        if(s1.length() != s2.length())
+            return false;
+        for(int i = 0; i < s2.length(); i++) {
+            count = 0;
+            StringBuilder currentString = new StringBuilder();
+            for(int j = i; count < s2.length(); j++){
+                if(j >= s2.length())
+                    j = 0;
+                currentString.append(s2.charAt(j));
+                count++;
+            }
+            if(currentString.toString().equals(s1))
+                return true;
+        }
+        return false;
+    }
+
+    // waterbottle, erbottlewaterbottlewat
+    // apple, pleappleap
+    public static boolean isRotationSimplified(String s1, String s2) {
+        if(s1.length() == 0 && s2.length() != 0)
+            return false;
+        s2 += s2;
+        return s2.contains(s1);
+    }
 }
