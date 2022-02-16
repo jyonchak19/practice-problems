@@ -108,4 +108,53 @@ public class StringProblemsTest {
         for(int i = 0; i < expectedResults.length; i++)
             Assert.assertEquals(expectedResults[i], StringProblems.isRotationSimplified(inputs[i][0], inputs[i][1]));
     }
+
+    @Test
+    public void oneEditAwayTestEmpty() {
+        Assert.assertFalse(StringProblems.oneEditAway("", ""));
+        Assert.assertFalse(StringProblems.oneEditAwayAlt("", ""));
+    }
+
+    @Test
+    public void oneEditAwayTestOneCharAndEmpty() {
+        Assert.assertTrue(StringProblems.oneEditAway("", "a"));
+        Assert.assertTrue(StringProblems.oneEditAway("a", ""));
+        Assert.assertTrue(StringProblems.oneEditAwayAlt("a", ""));
+    }
+
+    @Test
+    public void oneEditAwayTestAddChar() {
+        Assert.assertTrue(StringProblems.oneEditAway("a", "ab"));
+        Assert.assertTrue(StringProblems.oneEditAway("cat", "cata"));
+        Assert.assertTrue(StringProblems.oneEditAwayAlt("cat", "cata"));
+    }
+
+    @Test
+    public void oneEditAwayTest1Change() {
+        Assert.assertTrue(StringProblems.oneEditAway("aa", "ab"));
+        Assert.assertTrue(StringProblems.oneEditAway("ab", "aa"));
+        Assert.assertTrue(StringProblems.oneEditAway("four", "foor"));
+        Assert.assertTrue(StringProblems.oneEditAwayAlt("four", "foor"));
+    }
+
+    @Test
+    public void oneEditAwayTestMultipleChange() {
+        Assert.assertFalse(StringProblems.oneEditAway("ba", "ab"));
+        Assert.assertFalse(StringProblems.oneEditAway("bab", "aba"));
+        Assert.assertFalse(StringProblems.oneEditAwayAlt("bab", "aba"));
+    }
+
+    @Test
+    public void oneEditAwayTestOffBy2() {
+        Assert.assertFalse(StringProblems.oneEditAway("a", "aba"));
+        Assert.assertFalse(StringProblems.oneEditAway("ababa", "abababa"));
+        Assert.assertFalse(StringProblems.oneEditAwayAlt("ababa", "abababa"));
+    }
+
+    @Test
+    public void oneEditAwayTestDeleteChar() {
+        Assert.assertTrue(StringProblems.oneEditAway("ab", "a"));
+        Assert.assertTrue(StringProblems.oneEditAway("abababab", "abaabab"));
+        Assert.assertTrue(StringProblems.oneEditAwayAlt("abababab", "abaabab"));
+    }
 }

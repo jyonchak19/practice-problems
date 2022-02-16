@@ -401,4 +401,88 @@ public class StringProblems {
         s2 += s2;
         return s2.contains(s1);
     }
+
+    // edit: add a character, delete a character, change a character
+    // people, peple -> true (deleted character)
+    //   |       |
+    // people, people -> false (0 edits)
+    // peeple, people -> true (changed character)
+    // peoples, people -> true (added character)
+    // peeole, people -> false (two edits)
+    public static boolean oneEditAway(String first, String second) {
+        boolean shifted = false;
+        if(first.length() - second.length() == 1) {
+            return oneEditDelete(first, second);
+        }
+        else if(first.length() - second.length() == -1) {
+            return oneEditDelete(second, first);
+        }
+        else if(first.length() == second.length()) {
+            if(first.equals(second)) {
+                return false;
+            }
+            else {
+                return oneEditChange(first, second);
+            }
+        }
+        else {
+            return false;
+        }
+    }
+
+    private static boolean oneEditDelete(String first, String second) {
+        int i = 0;
+        int j = 0;
+        boolean shifted = false;
+        while(i < first.length() && j < second.length()) {
+            if(first.charAt(i) != second.charAt(j)) {
+                if(!shifted){
+                    shifted = true;
+                    i++;
+                }
+                else
+                    return false;
+            }
+            else {
+                i++;
+                j++;
+            }
+        }
+        return true;
+    }
+
+    private static boolean oneEditChange(String first, String second){
+        boolean changed = false;
+        for(int i = 0; i < first.length(); i++) {
+            if(first.charAt(i) != second.charAt(i)){
+                if(changed)
+                    return false;
+                changed = true;
+            }
+        }
+        return changed;
+    }
+
+    public static boolean oneEditAwayAlt(String first, String second) {
+        if (Math.abs(first.length() - second.length()) > 1) {
+            return false;
+        }
+        String s1 = first.length() < second.length() ? first: second;
+        String s2 = first.length() < second.length() ? second: first;
+        int i = 0, j = 0;
+        boolean changed = false;
+        while (j < s2.length() && i < s1.length()) {
+            if (s1.charAt(i) != s2.charAt(j)) { // first change found
+                if(changed)
+                    return false;
+                changed = true;
+                if (s1.length() == s2.length())
+                    i++;
+            } else {
+                i++;
+            }
+            j++;
+        }
+        return true;
+    }
 }
