@@ -362,12 +362,6 @@ public class StringProblems {
         return max;
     }
 
-    // TODO, harder problem - Dynamic Programming
-    // helloandhelloaardvark -> hello
-    public static String longestRepeatingSubstring(String str) {
-        return "";
-    }
-
     // apple, pleap -> true
     // waterbottle, erbottlewat -> true
     public static boolean isRotation(String s1, String s2) {
@@ -484,5 +478,73 @@ public class StringProblems {
             j++;
         }
         return true;
+    }
+
+    // racecar, ogo, bob
+    // carerac -> true
+    // goo -> true
+    // obb -> true
+    // aaaabaaaa
+
+    // ~~ pseudocode ~~
+    // count the characters with odd occurrences
+    // return (oddCharCount <= 1)
+    // classic hashmap usage
+    public static boolean isPermutedPalindrome(String s) {
+        if (s == null || s.length() == 0)
+            return false;
+        int oddCharCount = 0;
+        HashMap<Character, Integer> map = new HashMap<>();
+        for(char c: s.toCharArray()) {
+            if(map.containsKey(c))
+                map.put(c, map.get(c) + 1);
+            else
+                map.put(c, 1);
+        }
+        for(char c: map.keySet()) {
+            if(map.get(c) % 2 != 0)
+                oddCharCount++;
+        }
+        return oddCharCount <= 1;
+    }
+
+    // if you're limited by the ASCII character set,
+    // here's a common optimization...
+    // ex bogo
+    // 'pattern matching' technique
+    public static boolean isPermutedPalindromeOpt1(String s) {
+        if (s == null || s.length() == 0)
+            return false;
+        // constant amount of space, O(127)
+        int[] asciiCharCount = new int[128]; // 127 characters in ASCII
+        // char 'a' has some int value, ex 104
+        // [...0 0 0 0 ..2...]
+        //  ...a b c ... o (90)...
+        for (char c: s.toCharArray())
+            asciiCharCount[c]++;
+        int oddCharCount = 0;
+        for (int count: asciiCharCount) {
+            if(count % 2 != 0)
+                oddCharCount++;
+        }
+        return oddCharCount <= 1;
+    }
+
+
+    // we can use the properties of a Set to solve this problem as well.
+    // data structure brainstorm technique
+    public static boolean isPermutedPalindromeOpt2(String s) {
+        Set<Character> set = new HashSet<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (!set.add(s.charAt(i)))
+                set.remove(s.charAt(i));
+        }
+        return set.size() <= 1;
+    }
+
+    // TODO, harder problem - Dynamic Programming
+    // helloandhelloaardvark -> hello
+    public static String longestRepeatingSubstring(String str) {
+        return "";
     }
 }

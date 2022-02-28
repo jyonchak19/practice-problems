@@ -10,3 +10,18 @@ We can combine these two commands if we have no new files and are just tracking 
 
 Finally, we push those changes to the remote repo using ```git push```.
 ## JUnit
+
+
+## Steps for Walking Through an Interview Problem (from Cracking the Coding Interview)
+
+1. Listen (BUD: Bottlenecks, unneccessary work, duplicated work) weed out unneccessary info, ask questions
+2. Example - is your example a special case or edge case, is it big enough (a lot of examples are too small)
+3. Brute Force - ASAP, don't worry about optimizing or efficiency yet
+4. Optimization.
+5. Walk through your approach.
+6. Start implementing (do your bruteforce if necessary and time is short)
+7. Testing (throwing edge cases, testing arithmetic, null values, etc) finding bugs
+
+
+Approaches to Solving Problems
+ - data structure brainstorm (hash map, set, etc)
