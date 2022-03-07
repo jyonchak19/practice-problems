@@ -1,5 +1,7 @@
 package main.java.LinkedListExamples;
 
+import java.util.HashSet;
+
 public class LinkedListProblems {
 
     public static boolean findElement(int target, LinkedListNode root) {
@@ -14,6 +16,18 @@ public class LinkedListProblems {
 
     // given 1->1->2->3 ===> 1->2->3
     public static void removeDuplicates(LinkedListNode root) {
-
+        HashSet<Integer> set = new HashSet<>();
+        LinkedListNode current = root;
+        LinkedListNode previous = root;
+        while(current != null) {
+            if(set.contains(current.getData())) {
+                previous.setNext(current.getNext());
+            }
+            else {
+                set.add(current.getData());
+            }
+            previous = current;
+            current = current.getNext();
+        }
     }
 }

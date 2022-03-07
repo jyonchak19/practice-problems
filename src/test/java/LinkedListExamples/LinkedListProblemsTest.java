@@ -28,21 +28,26 @@ public class LinkedListProblemsTest {
         Assert.assertFalse(LinkedListProblems.findElement(target, null));
     }
 
-    @Test
-    public void removeDuplicatesTestSimple() {
-        int[] inputArray = {3,7,7,2};
-        LinkedListNode head = LinkedListNode.createList(inputArray);
+    public void removeDuplicatesHelper(int[] inputArray, int[] expectedResult) {
+        LinkedListNode head1 = LinkedListNode.createList(inputArray);
+        LinkedListProblems.removeDuplicates(head1);
+        LinkedListNode head2 = LinkedListNode.createList(expectedResult);
+        Assert.assertTrue(head1.listIsEqual(head2));
+    }
 
+    @Test
+    public void removeDuplicatesTestSimple () {
+        removeDuplicatesHelper(new int[]{3,7,7,2}, new int[]{3,7,2});
     }
 
     @Test
     public void removeDuplicatesTestMultiple() {
-
+        removeDuplicatesHelper(new int[]{3,7,7,5,5,2}, new int[]{3,7,5,2});
     }
 
     @Test
     public void removeDuplicatesTestScattered() {
-
+        removeDuplicatesHelper(new int[]{3,7,5,2,3,7}, new int[]{3,7,5,2});
     }
 
     @Test

@@ -1,8 +1,8 @@
 package main.java.LinkedListExamples;
 
 public class LinkedListNode {
-    int data;
-    LinkedListNode next;
+    private int data;
+    private LinkedListNode next;
 
     LinkedListNode(int data) {
         this.data = data;
@@ -40,10 +40,20 @@ public class LinkedListNode {
         return head;
     }
 
-    // someListNode.listIsEqual(someOtherListNode)
+    // usage ex: someListNode.listIsEqual(someOtherListNode)
     public boolean listIsEqual(LinkedListNode secondList) {
-        return false;
+        LinkedListNode first = this;
+        LinkedListNode second = secondList;
+
+        while(first != null && second != null) {
+            if(first.data != second.data)
+                return false;
+            first = first.next;
+            second = second.next;
+        }
+        return first == null && second == null;
     }
+
 
     public int getData(){
         return data;
