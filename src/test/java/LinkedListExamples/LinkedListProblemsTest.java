@@ -6,6 +6,12 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class LinkedListProblemsTest {
+    // generate a random int array
+    // create a linkedlist from that array
+    // generate another array from the random int array with all dupes removed
+    // random int array -> hashSet (remove dupes) ->
+    // benefits of automating and randomizing our test
+
     @Test
     public void findElementTestPositive() {
         int[] inputArray = {3,7,2};
@@ -52,6 +58,6 @@ public class LinkedListProblemsTest {
 
     @Test
     public void removeDuplicatesTestNone() {
-
+        removeDuplicatesHelper(new int[]{4,9,1,6}, new int[]{4,9,1,6});
     }
 }

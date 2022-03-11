@@ -19,15 +19,19 @@ public class LinkedListProblems {
         HashSet<Integer> set = new HashSet<>();
         LinkedListNode current = root;
         LinkedListNode previous = root;
-        while(current != null) {
-            if(set.contains(current.getData())) {
+        while (current != null) {
+            if (set.contains(current.getData())) {
                 previous.setNext(current.getNext());
-            }
-            else {
+            } else {
                 set.add(current.getData());
+                previous = current;
             }
-            previous = current;
             current = current.getNext();
         }
+    }
+
+    public static boolean isPalindrome(LinkedListNode root) {
+        LinkedListNode reverse = LinkedListNode.cloneAndReverseList(root);
+        return root.listIsEqual(reverse);
     }
 }

@@ -40,6 +40,19 @@ public class LinkedListNode {
         return head;
     }
 
+    // 4 -> 3 ->2 -> 1
+    // ^
+    // 4 <- 3
+    public static LinkedListNode cloneAndReverseList(LinkedListNode root){
+        LinkedListNode previous = null;
+        while (root != null) {
+            // traverse through passed in list and copy in reverse
+            previous = new LinkedListNode(root.data, previous);
+            root = root.next;
+        }
+        return previous;
+    }
+
     // usage ex: someListNode.listIsEqual(someOtherListNode)
     public boolean listIsEqual(LinkedListNode secondList) {
         LinkedListNode first = this;
