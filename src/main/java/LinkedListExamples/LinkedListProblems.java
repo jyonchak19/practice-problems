@@ -34,4 +34,14 @@ public class LinkedListProblems {
         LinkedListNode reverse = LinkedListNode.cloneAndReverseList(root);
         return root.listIsEqual(reverse);
     }
+
+    // ex: the number 123 will be represented by the LinkedList: root1 = 1-> 2-> 3
+    // the number 8 would just be: root2 = 8 -> null
+    // the sum 123 + 8 = 131 ex: return 1 -> 3 -> 1
+    // hint: int a = Integer.parseInt(Integer.toString(9) + Integer.toString(10));
+
+    public static LinkedListNode sumLinkedLists(LinkedListNode root1, LinkedListNode root2) {
+        LinkedListNode current = root1;
+
+    }
 }
