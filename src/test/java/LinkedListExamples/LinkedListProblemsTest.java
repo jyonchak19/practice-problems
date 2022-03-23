@@ -60,4 +60,11 @@ public class LinkedListProblemsTest {
     public void removeDuplicatesTestNone() {
         removeDuplicatesHelper(new int[]{4,9,1,6}, new int[]{4,9,1,6});
     }
+
+    @Test
+    public void sumLinkedListsTest(){
+        int[] input1 = {1, 2, 3};
+        int[] input2 = {8};
+        
+    }
 }
