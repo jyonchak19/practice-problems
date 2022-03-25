@@ -66,7 +66,18 @@ public class LinkedListProblems {
     // for the harder version, you cannot use any Java lib built-in functions as helpers
     // to simplify this somewhat, the input lists are in reverse (hint!!)
     // don't worry about negatives
+    //   1 ->   1
+    // + 9 ->   9
+    //          0
+    // carry = 0
+    // add each digit starting from left. to carry, take mod 10 of result, and add that to next sum
     public static LinkedListNode sumLinkedListsHard(LinkedListNode root1, LinkedListNode root2) {
-        return null;
+        LinkedListNode current1 = root1;
+        LinkedListNode current2 = root2;
+        int carry = 0;
+        while(current1 != null || current2 != null || carry != 0){
+            carry = root1.getData()+root2.getData()/10;
+            LinkedListNode resultNode = new LinkedListNode(root1.getData()+root2.getData()%10+carry);
+        }
     }
 }

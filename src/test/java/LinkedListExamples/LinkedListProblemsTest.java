@@ -62,9 +62,14 @@ public class LinkedListProblemsTest {
     }
 
     @Test
-    public void sumLinkedListsTest(){
-        int[] input1 = {1, 2, 3};
-        int[] input2 = {8};
-        
+    public void sumLinkedListsTestSimple() {
+        sumLinkedListsTestHelper(new int[]{1,2,3}, new int[]{8}, new int[]{1,3,1});
+    }
+
+    public void sumLinkedListsTestHelper(int[] input1, int[] input2, int[] expectedResult) {
+        LinkedListNode list1 = LinkedListNode.createList(input1);
+        LinkedListNode list2 = LinkedListNode.createList(input2);
+        LinkedListNode expectedList = LinkedListNode.createList(expectedResult);
+        Assert.assertTrue(LinkedListProblems.sumLinkedLists(list1, list2).listIsEqual(expectedList));
     }
 }
