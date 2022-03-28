@@ -2,6 +2,8 @@ package test.java.LinkedListExamples;
 
 import main.java.LinkedListExamples.LinkedListProblems;
 import main.java.LinkedListExamples.LinkedListNode;
+import java.util.Collections;
+import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -71,5 +73,24 @@ public class LinkedListProblemsTest {
         LinkedListNode list2 = LinkedListNode.createList(input2);
         LinkedListNode expectedList = LinkedListNode.createList(expectedResult);
         Assert.assertTrue(LinkedListProblems.sumLinkedLists(list1, list2).listIsEqual(expectedList));
+    }
+
+    @Test
+    public void sumLinkedListsHardTestSimple() {
+        sumLinkedListsHardTestHelper(new int[]{2,4,3}, new int[]{5,6,4}, new int[]{7,0,8});
+    }
+
+    public void sumLinkedListsHardTestHelper(int[] input1, int[] input2, int[] expectedResult) {
+//          Collections.reverse(Arrays.asList(myArray));
+////        Collections.reverse(Arrays.asList(input1));
+////        Collections.reverse(Arrays.asList(input2));
+////        Collections.reverse(Arrays.asList(expectedResult));
+////        System.out.println("Input1: " + Arrays.toString(input1));
+////        System.out.println("Input2: " + Arrays.toString(input2));
+////        System.out.println("expectedResult: " + Arrays.toString(expectedResult));
+        LinkedListNode list1 = LinkedListNode.createList(input1);
+        LinkedListNode list2 = LinkedListNode.createList(input2);
+        LinkedListNode expectedList = LinkedListNode.createList(expectedResult);
+        Assert.assertTrue(LinkedListProblems.sumLinkedListsHard(list1, list2).listIsEqual(expectedList));
     }
 }
