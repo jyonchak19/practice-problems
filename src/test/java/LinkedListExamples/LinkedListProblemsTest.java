@@ -80,6 +80,11 @@ public class LinkedListProblemsTest {
         sumLinkedListsHardTestHelper(new int[]{2,4,3}, new int[]{5,6,4}, new int[]{7,0,8});
     }
 
+    @Test
+    public void sumLinkedListsHardTestInputDifferent() {
+        sumLinkedListsHardTestHelper(new int[]{2,4,3}, new int[]{5}, new int[]{7,4,3});
+    }
+
     public void sumLinkedListsHardTestHelper(int[] input1, int[] input2, int[] expectedResult) {
 //          Collections.reverse(Arrays.asList(myArray));
 ////        Collections.reverse(Arrays.asList(input1));

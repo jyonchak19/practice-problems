@@ -75,20 +75,37 @@ public class LinkedListProblems {
     // ---------------------
     //   7 -> 0 -> 8 (807) (resultant list is also reversed)
     // add each digit starting from left. to carry, take mod 10 of result, and add that to next sum
+
+
+    // pseudocode
+
+    // init prev, head - pointers to a new null node
+    // while loop --->
+    // 1. init a curr node (check)
+    // 2. find the sum in some way (includes the carry)
+    // 3. update the curr node and the carry
+    // 4. update the previous (???) should prob update the prev.setNext, AND prev
+    // 5. update current1 and current2 to keep traversing
+
+    // HINT there is also one catch we should be aware of
+    // ternary operator => (current1 == null) ? 0 : current1.getData()
+    // (someConditionalExpression) ? trueReturn : falseReturn;
     public static LinkedListNode sumLinkedListsHard(LinkedListNode root1, LinkedListNode root2) {
         LinkedListNode current1 = root1;
         LinkedListNode current2 = root2;
         int carry = 0;
-        LinkedListNode curr = null;
-        
+        LinkedListNode head = new LinkedListNode(0);
+        LinkedListNode curr = head;
+
         while(current1 != null || current2 != null || carry != 0) {
-            curr = new LinkedListNode(0);
-            int sum = (current1.getData() + current2.getData()) % 10 + carry;
-            curr.setData(sum);
-            carry = (current1.getData() + current2.getData()) / 10;
-            current1 = current1.getNext();
-            current2 = current2.getNext();
+            int sum = (((current1 == null) ? 0 : current1.getData())
+                    + ((current2 == null) ? 0 : current2.getData())) + carry;
+            curr.setNext(new LinkedListNode(sum % 10));
+            carry = sum / 10;
+            current1 = (current1 == null) ? null : current1.getNext();
+            current2 = (current2 == null) ? null : current2.getNext();
+            curr = curr.getNext();
         }
-        return curr;
+        return head.getNext();
     }
 }
