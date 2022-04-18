@@ -108,4 +108,66 @@ public class LinkedListProblems {
         }
         return head.getNext();
     }
+
+
+    // 1 -> 2 -> 3 -> 4 -> 5
+    public static LinkedListNode kthToLast(LinkedListNode head, int k) {
+        LinkedListNode current = head;
+        int length = 0;
+        while(current != null){
+            length++;
+            current = current.getNext();
+        }
+        if(length < k)
+            return null;
+        current = head;
+        int targetNode = length - k;
+        for(int i = 1; i <= targetNode; i++) {
+            if(i == targetNode){
+                return current;
+            }
+            current = current.getNext();
+        }
+        return null;
+    }
+
+    // TODO
+    public static LinkedListNode kthToLastRecursive(LinkedListNode head, int k) {
+        if(head == null) {
+            return null;
+        }
+        return kthToLastRecursiveHelper(head, k, 0);
+    }
+
+    public static LinkedListNode kthToLastRecursiveHelper(LinkedListNode node, int k, int index) {
+        if(node == null)
+            return null;
+        LinkedListNode ret = kthToLastRecursiveHelper(node.getNext(), k, index);
+        index += 1;
+        if(k == index)
+            return node;
+        return ret;
+    }
+
+    // TODO
+    //           |         |
+    // 8 -> 5 -> 1 -> 3 -> 4
+    public static LinkedListNode kthToLastOnePass(LinkedListNode head, int k) {
+        LinkedListNode p1 = head;
+        LinkedListNode p2 = head;
+        // move p1 k nodes ahead of the start
+        // move both pointers together. whenever p1 hits the end, p2 will be
+        // exactly where we want it to be.
+        for(int i = 0; i <= k; i++) {
+            if(p1 == null)
+                return null;
+            p1 = p1.getNext();
+        }
+
+        while(p1 != null) {
+            p1 = p1.getNext();
+            p2 = p2.getNext();
+        }
+        return p2;
+    }
 }

@@ -29,6 +29,9 @@ public class LinkedListNode {
     // 3 2 1
     //   |
     public static LinkedListNode createList(int[] nums) {
+        if(nums == null || nums.length == 0) {
+            return null;
+        }
         LinkedListNode head = new LinkedListNode(nums[0]);
         LinkedListNode current = head;
 

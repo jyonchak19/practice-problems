@@ -171,7 +171,8 @@ public class RecursionProblems {
         if(start >= nums.length) {
             return target == 0;
         }
-        return groupSum(start + 1, nums, target) || groupSum(start + 1, nums, target - nums[start]);
+        return groupSum(start + 1, nums, target) ||
+                groupSum(start + 1, nums,  target - nums[start]);
     }
 
     // given an array of ints, determine if it's possible to pick a subset that sum
@@ -192,6 +193,52 @@ public class RecursionProblems {
             return groupSum5(start + 1, nums, target - nums[start]);
         else
             return groupSum5(start + 1, nums, target) || groupSum5(start + 1, nums, target - nums[start]);
+    }
+
+
+    // clump: any adjacent identical numbers
+    // we must choose all of them or none of them. Can't pick only one, even if it would sum to the total
+    // groupSumClump(0, [2,4,8], 10) -> true
+    // groupSumClump(0, [2, 4, 4, 4, 8], 20) -> true
+    // [2, 12, 0, 0, 8]
+    public static boolean groupSumClump(int start, int[] nums, int target) {
+        if(start >= nums.length)
+            return target == 0;
+        sumAdjacent(nums);
+        return groupSumClump(start + 1, nums, target) ||
+                groupSumClump(start + 1, nums, target - nums[start]);
+    }
+
+    // [0 12 0 0 0 5 7 ... ]
+    //    ^        ^
+    public static void sumAdjacent(int[] nums) {
+        if(nums.length == 0) return;
+        int clumpStart = 0;
+        int clumpNum = nums[clumpStart];
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == clumpNum) {
+                // hint: we want to 'erase' nums we've seen and
+                // are adding
+                nums[clumpStart] += clumpNum;
+                nums[i] = 0;
+            } else {
+                clumpNum = nums[i];
+                clumpStart = i;
+            }
+        }
+    }
+
+
+    // given an array of ints, compute recursively if the array
+    // contains a value that is a 10x another value in the array
+    // we'll use the 'index' variable to simplify the recursion
+    // arr10x([2,3,20], 0) -> true, bc 20 10x 2
+    // arr10x([3,0,30], 0) -> true
+    // arr10x([4], 0) -> false
+    public static boolean arr10x(int[] nums, int index){
+        if(index == nums.length)
+            return false;
+        if()
     }
 
     private static boolean chooseIfNot1After5(int start, int[] nums){
@@ -226,5 +273,15 @@ public class RecursionProblems {
         if(num == 0)
             return false;
         return num % 2 != 0;
+    }
+
+    // [1,2,5,3], 0 -> false
+    // [1,3,6,1], 0 -> true
+    public static boolean array6(int[] nums, int index) {
+        if(index == nums.length)
+            return false;
+        if(nums[index] == 6)
+            return true;
+        return array6(nums, index+1);
     }
 }
