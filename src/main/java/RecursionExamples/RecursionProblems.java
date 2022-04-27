@@ -232,13 +232,13 @@ public class RecursionProblems {
     // given an array of ints, compute recursively if the array
     // contains a value that is a 10x another value in the array
     // we'll use the 'index' variable to simplify the recursion
-    // arr10x([2,3,20], 0) -> true, bc 20 10x 2
-    // arr10x([3,0,30], 0) -> true
+    // arr10x([2, 20, 70], 0) -> true, bc 20 10x 2
+    // arr10x([3,30, 0], 0) -> true
     // arr10x([4], 0) -> false
-    public static boolean arr10x(int[] nums, int index){
+    public static boolean arr10x(int[] nums, int index) {
         if(index == nums.length)
             return false;
-        if()
+        return nums[index] * 10 == nums[index+1] || arr10x(nums, index + 1);
     }
 
     private static boolean chooseIfNot1After5(int start, int[] nums){
