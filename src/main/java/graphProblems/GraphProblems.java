@@ -32,7 +32,7 @@ public class GraphProblems {
             for (int j = 0; j < m; j++) {
                 if (grid[i][j] == '1' && !visited[i][j]) {
                     islandCount++;
-                    islandTraversal(grid, visited, i, j);
+                    islandTraversal(grid, visited, i, j, n, m);
                 }
             }
         }
@@ -40,8 +40,25 @@ public class GraphProblems {
     }
 
     // recursive helper
-    public static void islandTraversal(char[][] grid, boolean[][] visited, int i, int j) {
+    public static void islandTraversal(char[][] grid, boolean[][] visited, int i, int j, int n, int m) {
+        if(i < 0 || j < 0 || i >= n || j >= m || visited[i][j] || grid[i][j] == '0')
+            return;
+        visited[i][j] = true;
+        islandTraversal(grid, visited, i - 1, j, n, m);
+        islandTraversal(grid, visited, i +1, j, n, m);
+        islandTraversal(grid, visited, i, j - 1, n, m);
+        islandTraversal(grid, visited, i, j + 1, n, m);
+    }
 
+
+    // x,y, newColor -> 'flood fill' the image starting from image[x][y] with color newColor
+    // flood fill -> from the starting pixel, we'll move 4-directionally like before (up,down, left, right)
+    // and color all places that are the same color as the starting pixel with the new color
+    // [1 1 1]                           [32 32 32]
+    // [1 1 3]  x=1,y=1, newColor=32 --> [32 32  3]
+    // [1 2 1]                           [32  2  1]
+    public static int[][] pixelFloodFill(int[][] image, int x, int y, int newColor) {
+        return null;
     }
 
     // DFS iterative, based off of the video we watched last lesson
