@@ -58,7 +58,23 @@ public class GraphProblems {
     // [1 1 3]  x=1,y=1, newColor=32 --> [32 32  3]
     // [1 2 1]                           [32  2  1]
     public static int[][] pixelFloodFill(int[][] image, int x, int y, int newColor) {
-        return null;
+        if(x < 0 || y < 0 || x >= image.length || y >= image[0].length) {
+            return image;
+        }
+        pixelFloodFillHelper(image, x, y, newColor, image[x][y]);
+        return image;
+    }
+
+    public static void pixelFloodFillHelper(int[][] image, int x, int y, int newColor, int oldColor) {
+        if(x < 0 || y < 0 || x >= image.length || y >= image[0].length || image[x][y] != oldColor) {
+            return;
+        }
+
+        image[x][y] = newColor;
+        pixelFloodFillHelper(image, x - 1, y, newColor, oldColor);
+        pixelFloodFillHelper(image, x + 1, y, newColor, oldColor);
+        pixelFloodFillHelper(image, x, y - 1, newColor, oldColor);
+        pixelFloodFillHelper(image, x, y + 1, newColor, oldColor);
     }
 
     // DFS iterative, based off of the video we watched last lesson
