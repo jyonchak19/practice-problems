@@ -206,7 +206,6 @@ public class GraphProblems {
         return false;
     }
 
-
     // given a row x col grid that represents a map where grid[i][j] = 1 represents land
     // and the grid[i][j] = 0 represents water. Grid cells are connected horiz/vert, not diagonally.
     // the grid will contain only one island that is completely surrounded by water.
@@ -279,7 +278,6 @@ public class GraphProblems {
     // [0 0 x 0 0 0 0 0 ]
     // [k 0 0 0 0 0 0 0 ]
 
-
     // weighted graph, dijkstra's - just a modified BFS
     // with a weighted graph, BFS is no longer the simple
     // solution for a shortest path. BUT if there are no
@@ -291,19 +289,45 @@ public class GraphProblems {
     //  /  \  /  \
     // d   e  f   g
 
-    public static int minKnightMoves(int[][] grid, int[] start, int[] target, int n) {
-        int moveCount = 0;
-        Queue<Integer[]> queue = new LinkedList<>();
-        boolean[][] visited = new boolean[n][n];
-        int dx[] = {-2, -1, 1...};
-        int dy[] = {-1, -2, -2...};
-        // loop through all possible moves...
-        for (int i = 0; i < 8; i++) {
-            int x = curr[0] + dx[i];
-            int y = curr[1] + dy[i];
-            // still need to check if inside the board
-            // AND that we haven't visited already
+    // start = [7, 0]
+    //          x, y
+    static class Move {
+        int x, y, distance;
+        public Move(int x, int y, int distance) {
+            this.x = x;
+            this.y = y;
+            this.distance = distance;
         }
+    }
 
+    public static int minKnightMoves(int[] start, int[] target, int n) {
+        Queue<Move> queue = new LinkedList<>();
+        boolean[][] visited = new boolean[n][n];
+        int[] dx = {-2, -2, -1, -1, 1, 1, 2, 2};
+        int[] dy = { 1, -1,  2, -2, 2,-2, 1,-1};
+        // push start onto queue
+        queue.add(new Move(start[0], start[1], 0));
+        while(!queue.isEmpty()) {
+            Move curr = queue.remove();
+            if (curr.x == target[0] && curr.y == target[1])
+                return curr.distance;
+            // loop through all possible moves...
+            for (int i = 0; i < 8; i++) {
+                int x = curr.x + dx[i];
+                int y = curr.y + dy[i];
+                int dis = curr.distance;
+                // still need to check if inside the board
+                // AND that we haven't visited already
+                if (insideBounds(n, x, y) && !visited[x][y]) {
+                    visited[x][y] = true;
+                    queue.add(new Move(x, y, dis + 1));
+                }
+            }
+        }
+        return -1;
+    }
+
+    private static boolean insideBounds(int n, int x, int y) {
+        return x >= 0 && x < n && y >= 0 && y < n;
     }
 }

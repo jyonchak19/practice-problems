@@ -85,4 +85,22 @@ GraphProblemsTest {
         int expectedResult = 18;
         Assert.assertEquals(expectedResult, GraphProblems.islandPerimeter(inputGrid));
     }
+
+    @Test
+    public void minKnightMovesTest1() {
+        int[] start = {2,2};
+        int[] target = {0,1};
+        int n = 4;
+        int expectedResult = 1;
+        Assert.assertEquals(expectedResult, GraphProblems.minKnightMoves(start, target, n));
+    }
+
+    @Test
+    public void minKnightMovesTest2() {
+        int[] start = {4,5};
+        int[] target = {1,1};
+        int n = 5;
+        int expectedResult = 3;
+        Assert.assertEquals(expectedResult, GraphProblems.minKnightMoves(start, target, n));
+    }
 }
