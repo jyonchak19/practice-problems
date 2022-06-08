@@ -1,5 +1,10 @@
 package main.java.BinaryTreeExamples;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 public class Problems {
 
     // a tree is "uni-valued" if every node has the same value.
@@ -41,7 +46,7 @@ public class Problems {
 
     //      3
     //   4      5
-    // 5   4        7
+    // 5   4        7=
     // = ( conditionalStatement ? ifTrueValue : ifFalseValue  ) + (...)
     public static TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
         if(root1 == null && root2 == null)
@@ -89,6 +94,55 @@ public class Problems {
             dfsLeafNodesPrint(root.right);
     }
 
+    //
 
+    // given the root of a binary tree, return it's max depth - which is the number of nodes along the longest path
+    // from the root node to the farthest leaf node. You could use BFS, DFS, or a custom traversal algo
+    //              3
+    //        /           \
+    //       9             20                ->    max depth is 4
+    //                 /         \
+    //                15            7
+    //              /   \
+    //             4     2
+    public static int maxDepth(TreeNode root) {
+        if (root == null) return 0;
+        int maxDepthLeft = maxDepth(root.left);
+        int maxDepthRight = maxDepth(root.right);
+        return Math.max(maxDepthLeft, maxDepthRight) + 1;
+    }
+
+    // given the root of a binary tree, return the 'level order traversal' - which is the traversal
+    // from left to right, level by level
+    //              3
+    //        /           \
+    //       9             20              --->    [[3], [9,20], [1,2,15,7], [4,2]]
+    //      /  \         /         \
+    //     1    2     15            7
+    //              /   \
+    //             4     2
+    public static List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> list = new ArrayList<>();
+        levelOrderHelper(root, 0, list);
+        return list;
+    }
+
+    public static void levelOrderHelper(TreeNode root, int depth, List<List<Integer>> list) {
+        if(root == null)
+            return;
+        if(list.size() <= depth) {
+            list.add(new ArrayList<>());
+        }
+
+        list.get(depth).add(root.value);
+        levelOrderHelper(root.left, depth + 1, list);
+        levelOrderHelper(root.right, depth + 1, list);
+    }
+
+
+    public static List<List<Integer>> levelOrderBFS(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+
+    }
 }
 
