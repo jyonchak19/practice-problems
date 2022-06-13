@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class Problems {
+public class BinaryTreeProblems {
 
     // a tree is "uni-valued" if every node has the same value.
     public static boolean isUniValTree(TreeNode root, int currentValue) {
@@ -141,8 +141,25 @@ public class Problems {
 
 
     public static List<List<Integer>> levelOrderBFS(TreeNode root) {
+        List<List<Integer>> list = new ArrayList<>();
         Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
 
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            List<Integer> level = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.remove();
+                if (node != null) {
+                    level.add(node.value);
+                    queue.add(node.left);
+                    queue.add(node.right);
+                }
+            }
+            if (!level.isEmpty())
+                list.add(level);
+        }
+        return list;
     }
 }
 

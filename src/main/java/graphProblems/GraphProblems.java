@@ -330,4 +330,18 @@ public class GraphProblems {
     private static boolean insideBounds(int n, int x, int y) {
         return x >= 0 && x < n && y >= 0 && y < n;
     }
+
+    // given a rectangular field matrix with a few sensor bombs,
+    // cross the field by taking the shortest safe route without
+    // activating the sensors.
+
+    // [0 1 1 1 0 1 1 1 1 1 ]
+    // [1 1 1 1 1 1 1 1 1 1 ]
+    // [1 1 1 1 1 1 1 1 0 1 ]
+    // [1 1 1 1 1 1 1 1 1 1 ]
+
+    // [0 0 1 0 0 0 1 1 1 1 ]
+    // [0 0 1 0 0 0 1 0 0 0 ]
+    // [1 1 1 1 1 1 1 0 0 0 ]
+    // [1 1 1 1 1 1 1 0 0 0 ]
 }

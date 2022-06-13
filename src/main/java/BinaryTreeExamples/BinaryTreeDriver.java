@@ -8,7 +8,7 @@ public class BinaryTreeDriver {
         int[] arr2 = {2, 2, 2, 4, 9};
         root = constructBinaryTree(arr, root, 0);
         root2 = constructBinaryTree(arr2, root2, 0);
-        printTreeInOrder(Problems.mergeTrees(root, root2));
+        printTreeInOrder(BinaryTreeProblems.mergeTrees(root, root2));
 //        System.out.println(Problems.isUniValTree(root, -1));
 //        System.out.println(Problems.isValidBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE));
         //printTreeInOrder(root);

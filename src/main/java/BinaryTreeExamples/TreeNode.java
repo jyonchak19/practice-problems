@@ -1,9 +1,9 @@
 package main.java.BinaryTreeExamples;
 
 public class TreeNode {
-    int value;
-    TreeNode right;
-    TreeNode left;
+    public int value;
+    public TreeNode right;
+    public TreeNode left;
 
     public TreeNode(int value) {
         this.value = value;
