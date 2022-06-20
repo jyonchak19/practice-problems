@@ -331,6 +331,10 @@ public class GraphProblems {
         return x >= 0 && x < n && y >= 0 && y < n;
     }
 
+    private static boolean insideBounds(int n, int m, int x, int y) {
+        return x >= 0 && x < n && y >= 0 && y < m;
+    }
+
     // given a rectangular field matrix with a few sensor bombs,
     // cross the field by taking the shortest safe route without
     // activating the sensors.
@@ -340,8 +344,30 @@ public class GraphProblems {
     // [1 1 1 1 1 1 1 1 0 1 ]
     // [1 1 1 1 1 1 1 1 1 1 ]
 
-    // [0 0 1 0 0 0 1 1 1 1 ]
-    // [0 0 1 0 0 0 1 0 0 0 ]
-    // [1 1 1 1 1 1 1 0 0 0 ]
-    // [1 1 1 1 1 1 1 0 0 0 ]
+    // [0 2 1 2 0 2 1 1 1 1 ]
+    // [2 2 1 2 2 2 1 2 2 2 ]
+    // [1 1 1 1 1 1 1 2 0 2 ]   --> return num of steps
+    // [1 1 1 1 1 1 1 2 2 2 ]
+
+    // Q: (Moves) M1: 0,0,0, M2: 0,1, dist: 1
+    private static int shortestDistanceBombs(int[][] matrix) {
+        int n = matrix.length, m = matrix[0].length;
+        Queue<Move> queue = new LinkedList<>();
+        boolean[][] visited = new boolean[n][m];
+        int[] dx = {-1, 1, 0, 1, -1, 0, 1, -1};
+        int[] dy = {-1, 1, 1, 0, 0, -1, -1, 1};
+        int moves = 8, bombDetectedValue = 2;
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < m; j++) {
+                for (int k = 0; k < moves; k++) {
+                    if (matrix[i][j] == 0 && insideBounds(n, m, i + dx[k], j + dy[k])
+                            && matrix[i + dx[k]][j + dy[k]] == 1) {
+                        matrix[i][j] = bombDetectedValue;
+                    }
+                }
+            }
+        }
+
+        
+    }
 }
