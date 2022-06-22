@@ -103,4 +103,64 @@ GraphProblemsTest {
         int expectedResult = 3;
         Assert.assertEquals(expectedResult, GraphProblems.minKnightMoves(start, target, n));
     }
+
+    @Test
+    public void shortestDistanceBombsTest1() {
+        int[][] input = {
+                {0, 1, 1, 1, 0, 1, 1, 1, 1, 1},
+                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                {1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+        };
+        int expectedResult = 11;
+        Assert.assertEquals(expectedResult, GraphProblems.shortestDistanceBombs(input));
+    }
+    @Test
+    public void shortestDistanceBombsTest2() {
+        int[][] input =
+                {
+                        { 0, 1, 1, 1, 0, 1, 1, 1, 1, 1 },
+                        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+                        { 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 },
+                        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+                        { 1, 1, 1, 1, 1, 0, 1, 1, 1, 1 },
+                        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+                        { 1, 0, 1, 1, 1, 1, 1, 1, 1, 1 },
+                        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 },
+                        { 1, 1, 1, 1, 1, 0, 1, 1, 1, 1 },
+                        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+
+                };
+
+//        { 0, 2, 1, 2, 0, 2, 1, 1, 1, 1 }  //  11, 12, 13
+//        { 2, 2, 1, 2, 2, 2, 1, 2, 2, 2 }
+//        { 1, 1, 1, 1, 1, 1, 1, 2, 0, 2 }
+//        { 1, 1, 1, 1, 2, 2, 2, 2, 2, 2 }
+//        { 1, 1, 1, 1, 2, 0, 2, 1, 1, 1 }
+//        { 2, 2, 2, 1, 2, 2, 2, 1, 1, 1 }
+//        { 2, 0, 2, 1, 1, 1, 1, 1, 2, 2 }
+//        { 2, 2, 2, 1, 2, 2, 2, 1, 2, 0 }
+//        { 1, 1, 1, 1, 2, 0, 2, 1, 2, 2 }
+//        { 1, 1, 1, 1, 2, 2, 2, 1, 1, 1 }
+        int expectedResult = 11;
+        Assert.assertEquals(expectedResult, GraphProblems.shortestDistanceBombs(input));
+    }
+    @Test
+    public void shortestDistanceBombsTest3() {
+        int[][] input =
+                {
+                        {0, 1, 1, 1, 0, 1, 1, 1, 1, 1}, // 9
+                        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                        {1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+                        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                        {1, 1, 1, 1, 1, 0, 1, 1, 1, 1},
+                        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                        {1, 0, 1, 1, 1, 1, 1, 1, 1, 1},
+                        {1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
+                        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+                };
+        int expectedResult = 9;
+        Assert.assertEquals(expectedResult, GraphProblems.shortestDistanceBombs(input));
+    }
 }

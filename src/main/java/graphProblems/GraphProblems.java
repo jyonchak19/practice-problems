@@ -300,6 +300,7 @@ public class GraphProblems {
         }
     }
 
+    // start: (x, y), target: (x, y)
     public static int minKnightMoves(int[] start, int[] target, int n) {
         Queue<Move> queue = new LinkedList<>();
         boolean[][] visited = new boolean[n][n];
@@ -349,11 +350,15 @@ public class GraphProblems {
     // [1 1 1 1 1 1 1 2 0 2 ]   --> return num of steps
     // [1 1 1 1 1 1 1 2 2 2 ]
 
+    //Check if we need to reset visited array
+
     // Q: (Moves) M1: 0,0,0, M2: 0,1, dist: 1
-    private static int shortestDistanceBombs(int[][] matrix) {
+    // extend this to print out the moves next time
+    public static int shortestDistanceBombs(int[][] matrix) {
         int n = matrix.length, m = matrix[0].length;
         Queue<Move> queue = new LinkedList<>();
         boolean[][] visited = new boolean[n][m];
+        int currDistance = Integer.MAX_VALUE;
         int[] dx = {-1, 1, 0, 1, -1, 0, 1, -1};
         int[] dy = {-1, 1, 1, 0, 0, -1, -1, 1};
         int moves = 8, bombDetectedValue = 2;
@@ -362,12 +367,39 @@ public class GraphProblems {
                 for (int k = 0; k < moves; k++) {
                     if (matrix[i][j] == 0 && insideBounds(n, m, i + dx[k], j + dy[k])
                             && matrix[i + dx[k]][j + dy[k]] == 1) {
-                        matrix[i][j] = bombDetectedValue;
+                        matrix[i + dx[k]][j + dy[k]] = bombDetectedValue;
                     }
                 }
             }
         }
 
-        
+        for(int i = 0; i < matrix.length; i++) {
+            if(matrix[i][0] == 1) {
+                queue.add(new Move(i, 0, 0));
+                visited[i][0] = true;
+            }
+        }
+
+        int[] d2x = {0, 1, -1, 0};
+        int[] d2y = {1, 0, 0, -1};
+        int adjMoves = 4;
+
+        while(!queue.isEmpty()) {
+            Move curr = queue.remove();
+            if (curr.y == m - 1 ) //&& curr.distance < currDistance
+                //currDistance = curr.distance;
+                return curr.distance;
+            for (int i = 0; i < adjMoves; i++) {
+                int x = curr.x + d2x[i];
+                int y = curr.y + d2y[i];
+                int dis = curr.distance;
+                // need to fix the below to check adj spots!!
+                if (matrix[curr.x][curr.y] == 1 && insideBounds(n, m, x, y) && !visited[x][y]) {
+                    visited[x][y] = true;
+                    queue.add(new Move(x, y, dis + 1));
+                }
+            }
+        }
+        return currDistance;
     }
 }
