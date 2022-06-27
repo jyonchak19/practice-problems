@@ -350,8 +350,6 @@ public class GraphProblems {
     // [1 1 1 1 1 1 1 2 0 2 ]   --> return num of steps
     // [1 1 1 1 1 1 1 2 2 2 ]
 
-    //Check if we need to reset visited array
-
     // Q: (Moves) M1: 0,0,0, M2: 0,1, dist: 1
     // extend this to print out the moves next time
     public static int shortestDistanceBombs(int[][] matrix) {
@@ -393,7 +391,6 @@ public class GraphProblems {
                 int x = curr.x + d2x[i];
                 int y = curr.y + d2y[i];
                 int dis = curr.distance;
-                // need to fix the below to check adj spots!!
                 if (matrix[curr.x][curr.y] == 1 && insideBounds(n, m, x, y) && !visited[x][y]) {
                     visited[x][y] = true;
                     queue.add(new Move(x, y, dis + 1));
@@ -401,5 +398,48 @@ public class GraphProblems {
             }
         }
         return currDistance;
+    }
+
+
+    // given a binary rectangular maze, find the shortest path from (x, y), to (a,b)
+    // the path can only be constructed from True cells
+    // we can only move one step in one of four directions
+    // (x, y) -> x+1, x-1, y+1,y-1 (possible moves)
+    // constraint: must use backtracking.
+    // we will return the length of the shortest path.
+    //   if (x,y) = (0,0) and (a,b) = (7,5) in the matrix below...
+    //  the shortest path from the source to the goal has a length of 12.
+    //            [ 1  1  1  1  1  0  0  1  1  1 ]
+    //            [ 0  1  1  1  1  1  0  1  0  1 ]
+    //            [ 0  0  1  0  1  1  1  0  0  1 ]
+    //            [ 1  0  1  1  1  0  1  1  0  1 ]
+    //            [ 0  0  0  1  0  0  0  1  0  1 ]
+    //            [ 1  0  1  1  1  0  0  1  1  0 ]
+    //            [ 0  0  0  0  1  0  0  1  0  1 ]
+    //            [ 0  1  1  1  1  1  1  1  0  0 ]
+    //            [ 1  1  1  1  1  0  0  1  1  1 ]
+    //            [ 0  0  1  0  0  1  1  0  0  1 ]
+
+    public static int findShortestPath(boolean[][] matrix, int x, int y, int a, int b) {
+        boolean[][] visited = new boolean[matrix.length][matrix[0].length];
+        return findShortestPathHelper(matrix, x, y, a, b, visited, 0, Integer.MAX_VALUE);
+    }
+    // need a recursive helper
+    public static int findShortestPathHelper(boolean[][] matrix, int x, int y, int a, int b,
+                                             boolean[][] visited, int currDistance, int minDistance) {
+        int[] dx = {0, 0, -1, 1};
+        int[] dy = {1, -1, 0, 0};
+        visited[x][y] = true;
+        if(x == a && y == b && currDistance < minDistance)
+            minDistance = currDistance;
+        for (int i = 0; i < 4; i++) {
+            int x1 = x + dx[i];
+            int y1 = y + dy[i];
+            if (insideBounds(matrix.length, matrix[0].length, x1, y1) && matrix[x1][y1] && !visited[x1][y1]) {
+                findShortestPathHelper(matrix,x1, y1, a, b, visited, currDistance + 1, minDistance);
+            }
+        }
+        visited[x][y] = false;
+        return minDistance;
     }
 }
