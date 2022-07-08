@@ -1,9 +1,6 @@
 package main.java.BinaryTreeExamples;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class BinaryTreeProblems {
 
@@ -160,6 +157,33 @@ public class BinaryTreeProblems {
                 list.add(level);
         }
         return list;
+    }
+
+    // LCA: b/w two nodes p and q the lowest node in the given tree
+    // that has both p and q as a descendant (we can allow a node
+    // to be a descendant of itself)
+    //                 3
+    //             5      1
+    //         6     2   0   8
+    //             7   4
+    public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        ArrayList<TreeNode> pathToP = new ArrayList<>();
+        ArrayList<TreeNode> pathToQ = new ArrayList<>();
+    }
+
+    public static boolean lowestCommonAncestorHelper(TreeNode root, TreeNode x, ArrayList<TreeNode> arr) {
+        if(root == null)
+            return false;
+        if(root.value == x.value) {
+            arr.add(x);
+            return true;
+        }
+        else {
+            if(root.left != null)
+                lowestCommonAncestorHelper(root.left, x, arr);
+            if(root.right != null)
+                lowestCommonAncestorHelper(root.right, x, arr);
+        }
     }
 }
 

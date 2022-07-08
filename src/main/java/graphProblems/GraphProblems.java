@@ -1,5 +1,6 @@
 package main.java.graphProblems;
 
+import java.io.File;
 import java.util.*;
 
 public class GraphProblems {
@@ -427,19 +428,60 @@ public class GraphProblems {
     // need a recursive helper
     public static int findShortestPathHelper(boolean[][] matrix, int x, int y, int a, int b,
                                              boolean[][] visited, int currDistance, int minDistance) {
+        if(x == a && y == b)
+            return Math.min(currDistance, minDistance);
+
         int[] dx = {0, 0, -1, 1};
         int[] dy = {1, -1, 0, 0};
         visited[x][y] = true;
-        if(x == a && y == b && currDistance < minDistance)
-            minDistance = currDistance;
+
         for (int i = 0; i < 4; i++) {
             int x1 = x + dx[i];
             int y1 = y + dy[i];
             if (insideBounds(matrix.length, matrix[0].length, x1, y1) && matrix[x1][y1] && !visited[x1][y1]) {
-                findShortestPathHelper(matrix,x1, y1, a, b, visited, currDistance + 1, minDistance);
+                minDistance = findShortestPathHelper(matrix,x1, y1, a, b, visited, currDistance + 1, minDistance);
             }
         }
         visited[x][y] = false;
         return minDistance;
     }
+
+    /* **** example of code calling our method ****
+    // String dir = "/Users/rafi/Desktop";
+    // File rootDir = new File(dir);
+    // listFilesBFS(rootDir);
+
+    // *** File library methods that you'll need ***
+    // someFile.isDirectory() -> tells whether a file is a dir
+    // someFile.listFiles(); -> returns an array of Files and directories in someFile
+    // -> File[]
+
+    // *** example of final print ***
+    // image1.jpg
+    // image2.jpg
+     gda1.svg
+     gda2.svg
+
+                home (Users/rafi)
+            /         |     |      \
+        /Downloads
+
+    prints out the traversal from the given root directory */
+    public static void listFilesBFS(File root) {
+        Queue<File> queue = new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()) {
+            File currentDirectory = queue.remove();
+            File[] listOfFiles = currentDirectory.listFiles();
+            if(listOfFiles != null) {
+                for(File file: listOfFiles) {
+                    if(file.isDirectory())
+                        queue.add(file);
+                    else
+                        System.out.println(file);
+                }
+            }
+        }
+    }
+
 }

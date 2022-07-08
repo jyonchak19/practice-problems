@@ -163,4 +163,23 @@ GraphProblemsTest {
         int expectedResult = 9;
         Assert.assertEquals(expectedResult, GraphProblems.shortestDistanceBombs(input));
     }
+
+    @Test
+    public void findShortestPathTest1() {
+        boolean[][] input =
+                {
+                        {true, true, true, true, true, false, false, true, true, true},
+                        {false, true, true, true, true, true, false, true, false, true},
+                        {false, false, true, false, true, true, true, false, false, true},
+                        {true, false, true, true, true, false, true, true, false, true},
+                        {false, false, false, true, false, false, false, true, false, true},
+                        {true, false, true, true, true, false, false, true, true, false},
+                        {false, false, false, false, true, false, false, true, false, true},
+                        {false, true, true, true, true, true, true, true, false, false},
+                        {true, true, true, true, true, false, false, true, true, true},
+                        {false, false, true, false, false, true, true, false, false, true}
+                };
+        int expectedResult = 12;
+        Assert.assertEquals(expectedResult, GraphProblems.findShortestPath(input, 0, 0, 7, 5));
+    }
 }
