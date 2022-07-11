@@ -547,4 +547,14 @@ public class StringProblems {
     public static String longestRepeatingSubstring(String str) {
         return "";
     }
+
+    // "John Smith  " -> "John%20Smith"
+    public static String URLify(String input) {
+        
+    }
+
+    // modified problem w/ 0 space complexity
+    public static char[] URLify(char[] input) {
+        return null;
+    }
 }

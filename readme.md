@@ -11,8 +11,11 @@ We can combine these two commands if we have no new files and are just tracking 
 Finally, we push those changes to the remote repo using ```git push```.
 ## JUnit
 
-
 ## Steps for Walking Through an Interview Problem (from Cracking the Coding Interview)
+1. understanding the problem, asking questions (1, 2)
+2. solving fast, high level, trying examples, walking through them (3, 4, 5)
+3. implement, test, clean up code
+
 
 1. Listen (BUD: Bottlenecks, unneccessary work, duplicated work) weed out unneccessary info, ask questions
 2. Example - is your example a special case or edge case, is it big enough (a lot of examples are too small)
@@ -25,3 +28,4 @@ Finally, we push those changes to the remote repo using ```git push```.
 
 Approaches to Solving Problems
  - data structure brainstorm (hash map, set, etc)
+ - simplify and generalize

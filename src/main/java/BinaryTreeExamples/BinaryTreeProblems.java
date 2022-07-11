@@ -169,21 +169,32 @@ public class BinaryTreeProblems {
     public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         ArrayList<TreeNode> pathToP = new ArrayList<>();
         ArrayList<TreeNode> pathToQ = new ArrayList<>();
+        if(!lowestCommonAncestorHelper(root, p, pathToP) || !lowestCommonAncestorHelper(root, q, pathToQ))
+            return null;
+        int stoppingPoint = Math.min(pathToP.size(), pathToQ.size());
+        for(int i = 0; i < stoppingPoint; i++) {
+            if(i == stoppingPoint - 1)
+                return pathToP.get(i);
+            if(pathToP.get(i) != pathToQ.get(i))
+                return pathToP.get(i - 1);
+        }
+        return null;
     }
 
     public static boolean lowestCommonAncestorHelper(TreeNode root, TreeNode x, ArrayList<TreeNode> arr) {
         if(root == null)
             return false;
+        arr.add(root);
         if(root.value == x.value) {
-            arr.add(x);
             return true;
         }
-        else {
-            if(root.left != null)
-                lowestCommonAncestorHelper(root.left, x, arr);
-            if(root.right != null)
-                lowestCommonAncestorHelper(root.right, x, arr);
-        }
+        if(lowestCommonAncestorHelper(root.left, x, arr))
+            return true;
+        if(lowestCommonAncestorHelper(root.right, x, arr))
+            return true;
+
+        arr.remove(arr.size() - 1);
+        return false;
     }
 }
 
