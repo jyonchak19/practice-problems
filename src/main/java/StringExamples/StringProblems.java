@@ -548,13 +548,37 @@ public class StringProblems {
         return "";
     }
 
-    // "John Smith  " -> "John%20Smith"
+    // https://google.com/search/John%20Smith%20
+    // "John Smith " -> "John%20Smith%20"
     public static String URLify(String input) {
-        
+        StringBuilder result = new StringBuilder();
+        for(int i = 0; i < input.length(); i++) {
+            if(input.charAt(i) == ' ') {
+                result.append("%20");
+            }
+            else {
+                result.append(input.charAt(i));
+            }
+        }
+        return result.toString();
     }
 
     // modified problem w/ 0 space complexity
-    public static char[] URLify(char[] input) {
-        return null;
+    // "    John Sm ith        " -> "John%20Sm%20ith"
+    public static char[] URLify(char[] input, int length) {
+        int j = input.length - 1;
+        for(int i = length - 1; i >= 0; i--) {
+            if(input[i] != ' ') {
+                input[j] = input[i];
+                j--;
+            }
+            else {
+                input[j] = '0';
+                input[j-1] = '2';
+                input[j - 2] = '%';
+                j -= 3;
+            }
+        }
+        return input;
     }
 }

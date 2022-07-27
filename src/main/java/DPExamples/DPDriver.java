@@ -45,7 +45,7 @@ public class DPDriver {
     public static void coinChangeTest(){
         int[] nList = {11, 76};
         int[][] coinList = {{1, 2, 5}, {2, 5, 10, 25}};
-        int[] outputList = {3};
+        int[] outputList = {3, 7};
 
         for(int i = 0; i < nList.length; i++) {
             System.out.println("N: " + nList[i]);

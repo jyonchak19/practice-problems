@@ -284,4 +284,51 @@ public class RecursionProblems {
             return true;
         return array6(nums, index+1);
     }
+
+    // given an int array coins, represents different denominations
+    // of coins [1,5,10...] and an int amount representing a total
+    // amount of money, return the fewest number of coins needed
+    // to make up that amount. if there isn't a match, return -1
+    public static int coinChange(int[] coins, int amount) {
+        return coinChangeHelper(coins, amount, 0);
+    }
+
+    public static int coinChangeHelper(int[] coins, int amount, int numCoins) {
+        if(amount < 0)
+            return -1;
+        if(amount == 0)
+            return numCoins;
+        int currentMin = Integer.MAX_VALUE;
+        int result;
+        for(int coin: coins) {
+            result = coinChangeHelper(coins, amount - coin, numCoins + 1);
+            if(currentMin > result && result != -1)
+                currentMin = result;
+        }
+        return currentMin;
+    }
+
+    public static int coinChangeMemoized(int[] coins, int amount) {
+        return coinChangeMemoizedHelper(coins, amount, new int[amount]);
+    }
+    // amount 10
+    // 1,2,5
+    // [ 0 0 0 0 0 0 0 0 0 3  0 ]
+    //   0 1 2 3 4 5 6 7 8 9 10
+    public static int coinChangeMemoizedHelper(int[] coins, int amount, int[] dp) {
+        if(amount < 0)
+            return -1;
+        if(amount == 0)
+            return 0;
+        if(dp[amount - 1] != 0) // was the result already computed?
+            return dp[amount - 1]; // return computed result
+        int currentMin = Integer.MAX_VALUE;
+        for(int coin: coins) {
+            int result = coinChangeMemoizedHelper(coins, amount - coin, dp);
+            if(currentMin > result && result != -1)
+                currentMin = result + 1;
+        }
+        dp[amount - 1] = (currentMin == Integer.MAX_VALUE) ? -1 : currentMin; // computing and storing
+        return currentMin;
+    }
 }

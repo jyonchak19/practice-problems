@@ -1,5 +1,6 @@
 package test.java.RecursionExamples;
 
+import main.java.DPExamples.DPProblems;
 import main.java.RecursionExamples.RecursionProblems;
 import org.junit.Test;
 import org.junit.Assert;
@@ -41,5 +42,37 @@ public class RecursionProblemsTest {
             System.out.println("numsInput: " + Arrays.toString(numsInputs[i]));
             Assert.assertEquals(RecursionProblems.splitOdd10(numsInputs[i]), expectedResult[i]);
         }
+    }
+
+    @Test
+    public void coinChangeTest1(){
+        int n = 11;
+        int[] coins = {1, 2, 5};
+        int expectedResult = 3;
+        Assert.assertEquals(expectedResult, RecursionProblems.coinChange(coins, n));
+    }
+
+    @Test
+    public void coinChangeTest2() {
+        int n = 76;
+        int[] coins = {2, 5, 10, 25};
+        int expectedResult = 7;
+        Assert.assertEquals(expectedResult, RecursionProblems.coinChange(coins, n));
+    }
+
+    @Test
+    public void coinChangeMemoizedTest1(){
+        int n = 11;
+        int[] coins = {1, 2, 5};
+        int expectedResult = 3;
+        Assert.assertEquals(expectedResult, RecursionProblems.coinChangeMemoized(coins, n));
+    }
+
+    @Test
+    public void coinChangeMemoizedTest2() {
+        int n = 76;
+        int[] coins = {2, 5, 10, 25};
+        int expectedResult = 7;
+        Assert.assertEquals(expectedResult, RecursionProblems.coinChangeMemoized(coins, n));
     }
 }
