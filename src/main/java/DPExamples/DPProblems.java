@@ -139,12 +139,55 @@ public class DPProblems {
         }
         return dp[amount];
     }
+
+    // a robot is located at the top left corner of an m x n grid. it can only move down or right
+    // at any point in time. the robot is trying to reach the bottom right corner of the grid.
+    // how many possible unique paths are there for the robot to take?
+    // [^       ]
+    // [        ]
+    // [       .]
+    public static int uniqueRobotPaths(int m, int n) {
+        int[][] dp = new int[m][n];
+        return uniqueRobotPathsHelper(m, n, 0, 0, dp);
+    }
+
+    public static int uniqueRobotPathsHelper(int m, int n, int x, int y, int[][] dp) {
+        if (x == m - 1 && y == n - 1) {
+            return 1;
+        }
+        if(x == m || y == n) {
+            return 0;
+        }
+        if(dp[x][y] != 0) {
+            return dp[x][y];
+        }
+        dp[x][y] = uniqueRobotPathsHelper(m, n, x + 1, y, dp) + uniqueRobotPathsHelper(m, n, x, y + 1, dp);
+        return dp[x][y];
+    }
+
+    // KNAPSACK PROBLEM (0/1 knapsack problem): given a set of items, each with a weight and value, determine
+    // the number of each item to include in a set of items where the total weight is
+    // less than or equal to a given limit and the value is as large as possible
+    // (we have a knapsack, we want the weight to be small and the value of goods to be large)
+    public static int knapsack(int weightLimit, int[] weights, int[] values, int numOfItems) {
+        int[][] dp = new int[numOfItems][2];
+        return knapsackHelper(weightLimit, weights, values, numOfItems, dp);
+    }
+
+    public static int knapsackHelper(int weightLimit, int[] weights, int[] values, int numOfItems, int[][] dp) {
+        if (weightLimit == 0 || numOfItems == 0) {
+            return 0;
+        }
+        int valueIncluding;
+        if(weightLimit < weights[numOfItems - 1])
+            dp[numOfItems - 1][0] = valueIncluding = Integer.MIN_VALUE;
+        else {
+            dp[numOfItems - 1][0] = valueIncluding = values[numOfItems - 1] + knapsackHelper(weightLimit - weights[numOfItems - 1], weights, values, numOfItems - 1);
+        }
+        int valueExcluding = knapsackHelper(weightLimit, weights, values, numOfItems - 1);
+        return Math.max(valueIncluding, valueExcluding);
+    }
+
+    // longest common subsequence - variants of subsequence
+
 }
-
-// KNAPSACK PROBLEM: given a set of items, each with a weight and value, determine
-// the number of each item to include in a set of items where the total weight is
-// less than or equal to a given limit and the value is as large as possible
-// (we have a knapsack, we want the weight to be small and the value of goods to be large)
-
-
-// longest common subsequence - variants of subsequence
