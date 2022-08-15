@@ -25,4 +25,16 @@ public class DPProblemsTest {
         int[] weights = { 10, 20, 30 };
         Assert.assertEquals(220, DPProblems.knapsack(50, weights, values, 3));
     }
+    @Test
+    public void knapsackTest2() {
+        int[] values = { 10, 15, 40 };
+        int[] weights = { 1, 2, 3 };
+        Assert.assertEquals(65, DPProblems.knapsack(6, weights, values, 3));
+    }
+    @Test
+    public void knapsackTest3() {
+        int[] values = { 10, 15, 40 };
+        int[] weights = { 3, 7, 9 };
+        Assert.assertEquals(65, DPProblems.knapsack(20, weights, values, 3));
+    }
 }

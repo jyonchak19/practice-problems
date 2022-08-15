@@ -182,12 +182,45 @@ public class DPProblems {
         if(weightLimit < weights[numOfItems - 1])
             dp[numOfItems - 1][0] = valueIncluding = Integer.MIN_VALUE;
         else {
-            dp[numOfItems - 1][0] = valueIncluding = values[numOfItems - 1] + knapsackHelper(weightLimit - weights[numOfItems - 1], weights, values, numOfItems - 1);
+            dp[numOfItems - 1][0] = valueIncluding = values[numOfItems - 1] + knapsackHelper(weightLimit - weights[numOfItems - 1], weights, values, numOfItems - 1, dp);
         }
-        int valueExcluding = knapsackHelper(weightLimit, weights, values, numOfItems - 1);
+        int valueExcluding = knapsackHelper(weightLimit, weights, values, numOfItems - 1, dp);
         return Math.max(valueIncluding, valueExcluding);
     }
 
-    // longest common subsequence - variants of subsequence
+    // unbounded knapsack problem (repetition allowed)
 
+
+    // longest common subsequence - variants of subsequence (LCS)
+    // return length of LCS (if none, return 0)
+    // example 1
+    // x: abcde
+    // y: ace
+    // LCS: 3, ace
+    // example 2
+    // x: abcdbdab
+    // y: bdcaba
+    // LCS: 4
+    // LCS are BDAB, BCAB, BCBA
+    // example 3
+    // x: abc
+    // y: abc
+    // LCS: 3, abc
+    // ex 4
+    // x: abc
+    // y: def
+    // LCS: 0, no LCS
+    public static int LCS(String x, String y) {
+        return LCSHelper(x, y, 0, 0);
+    }
+
+    public static int LCSHelper(String x, String y, int i, int j) {
+        if(i == x.length() && j == y.length())
+            return 0;
+        if(x.charAt(i) == y.charAt(j)) {
+            return 1 + LCSHelper(x, y, i + 1, j + 1);
+        }
+        else
+            return Math.max(LCSHelper(x, y, i + 1, j), LCSHelper(x, y, i, j + 1));
+    }
 }
