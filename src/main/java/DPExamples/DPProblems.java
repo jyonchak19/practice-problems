@@ -215,12 +215,38 @@ public class DPProblems {
     }
 
     public static int LCSHelper(String x, String y, int i, int j) {
-        if(i == x.length() && j == y.length())
+        if(i == x.length() || j == y.length())
             return 0;
         if(x.charAt(i) == y.charAt(j)) {
             return 1 + LCSHelper(x, y, i + 1, j + 1);
         }
         else
             return Math.max(LCSHelper(x, y, i + 1, j), LCSHelper(x, y, i, j + 1));
+    }
+                // input(6,8) lcs=0   (0,0)
+    //                               /      \
+    //                            (1,0)     (0,1)
+    //                         /      \    /      \
+    //                       (2,0)    (1,1)
+
+    public static int dpLCS(String x, String y) {
+        int[][] dp = new int[x.length() + 1][y.length() + 1];
+        return dpLCSHelper(x, y, 0, 0, dp);
+    }
+    public static int dpLCSHelper(String x, String y, int i, int j, int[][] dp) {
+        if(i == x.length() || j == y.length())
+            return 0;
+        if(dp[i][j] != 0)
+            return dp[i][j];
+        // do the curr i & j match for x & y
+        if(x.charAt(i) == y.charAt(j)) {
+            dp[i + 1][j + 1] = 1 + dpLCSHelper(x, y, i + 1, j + 1, dp);
+            return dp[i+1][j+1];
+        }
+        else { // they don't
+            dp[i + 1][j] = dpLCSHelper(x, y, i + 1, j, dp);
+            dp[i][j + 1] = dpLCSHelper(x, y, i, j + 1, dp);
+            return Math.max(dp[i+1][j], dp[i][j+1]);
+        }
     }
 }

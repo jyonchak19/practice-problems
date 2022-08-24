@@ -37,4 +37,42 @@ public class DPProblemsTest {
         int[] weights = { 3, 7, 9 };
         Assert.assertEquals(65, DPProblems.knapsack(20, weights, values, 3));
     }
+
+    @Test
+    public void LCSTest1() {
+        Assert.assertEquals(3, DPProblems.LCS("abcde", "ace"));
+    }
+
+    @Test
+    public void LCSTest2() {
+        Assert.assertEquals(4, DPProblems.LCS("abcdbdab", "bdcaba"));
+    }
+
+    @Test
+    public void LCSTest3() {
+        Assert.assertEquals(3, DPProblems.LCS("abc", "abc"));
+    }
+    @Test
+    public void LCSTest4() {
+        Assert.assertEquals(0, DPProblems.LCS("abc", "def"));
+    }
+
+    @Test
+    public void dpLCSTest1() {
+        Assert.assertEquals(3, DPProblems.dpLCS("abcde", "ace"));
+    }
+
+    @Test
+    public void dpLCSTest2() {
+        Assert.assertEquals(4, DPProblems.dpLCS("abcdbdab", "bdcaba"));
+    }
+
+    @Test
+    public void dpLCSTest3() {
+        Assert.assertEquals(3, DPProblems.dpLCS("abc", "abc"));
+    }
+    @Test
+    public void dpLCSTest4() {
+        Assert.assertEquals(0, DPProblems.dpLCS("abc", "def"));
+    }
 }
