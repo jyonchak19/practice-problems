@@ -61,7 +61,6 @@ public class DPProblemsTest {
     public void dpLCSTest1() {
         Assert.assertEquals(3, DPProblems.dpLCS("abcde", "ace"));
     }
-
     @Test
     public void dpLCSTest2() {
         Assert.assertEquals(4, DPProblems.dpLCS("abcdbdab", "bdcaba"));
@@ -75,4 +74,17 @@ public class DPProblemsTest {
     public void dpLCSTest4() {
         Assert.assertEquals(0, DPProblems.dpLCS("abc", "def"));
     }
+
+    @Test
+    public void subsetSumTest1() {
+        Assert.assertTrue(DPProblems.subsetSum(new int[]{7, 3, 2, 5, 8}, 5, 14));
+    }
+
+    // excluding 11 and including 5 and 6
+    //
+    @Test
+    public void subsetSumTest2() {
+        Assert.assertTrue(DPProblems.subsetSum(new int[]{3, 4, 5, 6, 11}, 5, 14));
+    }
+
 }

@@ -249,4 +249,37 @@ public class DPProblems {
             return Math.max(dp[i+1][j], dp[i][j+1]);
         }
     }
+
+    // nums = { 7,3,2,5,8 }
+    // k = 14
+    // subset 7,2,5 sums to 14
+
+    //                          (4,0)
+    //            yes/     is 8 in set?    \no
+    //            (3,8)                      (3,0)
+    //          /        \                 /      \
+    //        (2,13)    (2,8)           (2,5)      (2,0)
+    //      /    \      /    \          /    \    /    \
+    //   (1,15) (1,13)(1,10) (1,8)    (1,7) (1,5)(1,2) (1,0)
+    //  /     \
+    public static boolean subsetSum(int[] nums, int n, int k) {
+        int[][] dp = new int[n + 1][k + 1];
+        return subsetSumHelper(nums, n - 1, k, 0, dp);
+    }
+    public static boolean subsetSumHelper(int[] nums, int n, int k, int currentSum, int[][] dp) {
+        int TRUE_MARKER = 2; // typically a const inside the class
+        int FALSE_MARKER = 1;
+        if(currentSum == k)
+            return true;
+        if(n < 0 || currentSum > k)
+            return false;
+        if(dp[n][currentSum] == 0) {
+            if(subsetSumHelper(nums, n - 1, k, currentSum + nums[n], dp)
+                    || subsetSumHelper(nums, n - 1, k, currentSum, dp))
+                dp[n][currentSum] = TRUE_MARKER;
+            else
+                dp[n][currentSum] = FALSE_MARKER;
+        }
+        return dp[n][currentSum] == TRUE_MARKER;
+    }
 }
